@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.bill.OrderCommo" table="T_ORDER_COMMO" lazy="false">
+		<id name="id" type="long" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<property name="orderId" type="long" column="ORDER_ID" not-null="true" />
+		
+		<property name="commoId" type="long" column="COMMO_ID" not-null="true" />
+		<property name="commoName" type="string" column="COMMO_NAME" not-null="true" length="50" />
+
+		<property name="sellPrice" type="big_decimal" column="SELL_PRICE" not-null="true"/>
+		<property name="settlePrice" type="big_decimal" column="SETTLE_PRICE" not-null="true" />
+
+		<property name="commoAmount" type="integer" column="COMMO_AMOUNT"
+			not-null="true" />
+
+		<property name="createTime" type="timestamp" column="CREATE_TIME"
+			not-null="true" />
+		<property name="lastModified" type="timestamp" column="LAST_MODIFIED"
+			not-null="true" />
+		<property name="status" type="string" column="STATUS" not-null="true" />
+	</class>
+</hibernate-mapping>

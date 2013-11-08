@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.admin.Menu" table="t_sys_menu" lazy="false">
+		<id name="id" type="long" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="menuCode" type="string" column="menuCode" not-null="true" />
+		<property name="menuName" type="string" column="menuName" not-null="true" />
+		<property name="href" type="string" column="href" />
+		<property name="level" type="integer" column="level" not-null="true" />
+		<property name="orderIndex" type="integer" column="orderIndex" not-null="true" />
+		<property name="annotation" type="string" column="annotation" not-null="true" />
+		
+		<property name="pId" type="long" column="p_mId" />
+		<property name="pName" type="string" column="p_mName" />
+
+		<property name="createTime" type="timestamp" column="createTime" not-null="true" />
+		<property name="lastModified" type="timestamp" column="lastModified" not-null="true" />
+		<property name="status" type="string" column="STATUS" not-null="true" />
+	</class>
+</hibernate-mapping>

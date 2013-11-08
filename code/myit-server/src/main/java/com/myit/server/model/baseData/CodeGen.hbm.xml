@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.baseData.CodeGen" table="T_COMM_CODEGEN">
+		<id name="id" type="long" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<property name="codeType" type="string" column="CODE_TYPE"
+			not-null="true" length="50" />
+		<property name="genTpl" type="string" column="GEN_TPL"
+			not-null="true" length="50" />
+		<property name="curValue" type="long" column="CUR_VALUE"
+			not-null="true" />
+		<property name="codeDescribe" type="string" column="CODE_DESCRIBE"
+			not-null="true" length="255" />
+
+		<property name="createTime" type="date" column="CREATE_TIME"
+			not-null="true" />
+		<property name="lastModified" type="date" column="LAST_MODIFIED" />
+		<property name="status" type="string" column="STATUS" not-null="true" />
+	</class>
+</hibernate-mapping>

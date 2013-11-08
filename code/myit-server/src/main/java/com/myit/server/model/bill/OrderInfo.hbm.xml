@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.bill.OrderInfo" table="T_ORDER_ORDERINFO">
+		<id name="id" type="long" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<property name="memberNo" type="string" column="MEMBER_NO"
+			not-null="true" />
+
+		<property name="orderNo" type="string" column="ORDER_NO"
+			not-null="true" length="20" />
+
+		<property name="contactName" type="string" column="CONTACT_NAME"
+			not-null="true" length="50" />
+
+		<property name="mobile" type="string" column="MOBILE"
+			not-null="true" length="20" />
+
+		<property name="email" type="string" column="EMAIL" length="50" />
+
+		<property name="provinceId" type="long" column="PROVINCE_ID"
+			not-null="true" />
+
+		<property name="cityId" type="long" column="CITY_ID"
+			not-null="true" />
+
+		<property name="countyId" type="long" column="COUNTY_ID"
+			not-null="true" />
+
+		<property name="address" type="string" column="ADDRESS"
+			not-null="true" length="255" />
+
+		<property name="sellAmount" type="big_decimal" column="SELL_AMOUNT" />
+
+		<property name="settleAmount" type="big_decimal" column="SETTLE_AMOUNT" />
+
+		<property name="createTime" type="timestamp" column="CREATE_TIME"
+			not-null="true" />
+		<property name="lastModified" type="timestamp" column="LAST_MODIFIED" />
+		<property name="status" type="string" column="STATUS" not-null="true"
+			length="2" />
+	</class>
+</hibernate-mapping>

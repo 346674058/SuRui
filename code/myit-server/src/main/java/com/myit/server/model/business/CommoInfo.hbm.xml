@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-7-17 20:13:44 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.myit.server.model.business.CommoInfo" table="t_business_commoInfo">
+        <id name="id" type="long" column="ID" >
+            <generator class="increment" />
+        </id>
+        
+        <property name="commoNo" type="string" column="COMMO_NO" length="20" not-null="true"/>
+        <property name="commoName" type="string" column="COMMO_NAME" length="50" not-null="true"/>
+        <property name="commoDescribe" type="string" column="COMMO_DESCRIBE" not-null="true" length="255" />
+        
+        <property name="businessId" type="long" column="BUSINESS_ID" not-null="true"/>
+        
+		<property name="sellPrice" type="big_decimal" column="SELL_PRICE" not-null="true"/>
+		<property name="settlePrice" type="big_decimal" column="SETTLE_PRICE" not-null="true" />
+        
+        <property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />
+        <property name="lastModified" type="date" column="LAST_MODIFIED"/>
+        <property name="status" type="string" column="STATUS" length="2" not-null="true"/>
+        
+    </class>
+</hibernate-mapping>

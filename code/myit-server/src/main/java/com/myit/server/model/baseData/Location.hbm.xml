@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-7-17 20:13:44 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.myit.server.model.baseData.Location" table="t_comm_location">
+        <id name="id" type="long" column="ID">
+            <generator class="identity" />
+        </id>
+        <property name="provId" type="long" column="PROV_ID" not-null="true"/>
+        <property name="provName" type="string" column="PROV_NAME" length="50" not-null="true"/>
+        
+        <property name="cityId" type="long" column="CITY_ID" not-null="true"/>
+        <property name="cityName" type="string" column="CITY_NAME" length="50" not-null="true"/>
+        
+        <property name="countyId" type="long" column="COUNTY_ID" not-null="true"/>
+        <property name="countyName" type="string" column="COUNTY_NAME" length="50" not-null="true"/>
+        
+        <property name="createTime" type="date" column="CREATE_TIME" length="19" not-null="true"/>
+        
+        <property name="lastModified" type="date" column="LAST_MODIFIED" length="19"/>
+        <property name="status" type="string" column="STATUS" length="2" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-7-17 20:13:44 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.myit.server.model.business.BusinessShipping" table="t_business_shipping">
+        <id name="id" type="long" column="ID">
+            <generator class="increment" />
+        </id>
+        <property name="businessId" type="long" column="BUSINESS_ID" not-null="true"/>
+        <property name="locationId" type="long" column="LOCATION_ID" not-null="true" />
+        <property name="address" type="string" column="ADDRESS" length="255" />
+        
+        <property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />
+        <property name="lastModified" type="date" column="LAST_MODIFIED"/>
+        <property name="status" type="string" column="STATUS" length="2" not-null="true"/>
+    </class>
+</hibernate-mapping>

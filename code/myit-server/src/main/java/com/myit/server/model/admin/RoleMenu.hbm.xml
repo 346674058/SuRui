@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.admin.RoleMenu" table="t_sys_rolemenu" lazy="false">
+		<id name="id" type="long" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="mId" type="long" column="mid" not-null="true" />
+		<property name="rId" type="long" column="rid" not-null="true" />
+
+		<property name="createTime" type="timestamp" column="createTime" not-null="true" />
+		<property name="lastModified" type="timestamp" column="lastModified" not-null="true" />
+		<property name="status" type="string" column="STATUS" not-null="true" />
+	</class>
+</hibernate-mapping>

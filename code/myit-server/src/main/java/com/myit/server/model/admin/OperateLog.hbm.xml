@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.admin.OperateLog" table="T_SYS_OPLOG"
+		lazy="false">
+		<id name="id" type="long" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<property name="userName" type="string" column="USER_NAME" not-null="true" length="20" />
+		<property name="opType" type="string" column="OP_TYPE" not-null="true" length="50" />
+		<property name="opDscribe" type="string" column="OP_DESCRIBE" length="255" not-null="true" />
+
+		<property name="createTime" type="date" column="CREATE_TIME" not-null="true" />
+	</class>
+</hibernate-mapping>

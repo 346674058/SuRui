@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
+	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
+<hibernate-mapping>
+	<class name="com.myit.server.model.admin.User" table="T_SYS_USER" lazy="false">
+		<id name="id" type="long" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<property name="userName" type="string" column="USER_NAME" not-null="true" length="20" />
+		<property name="password" type="string" column="PASSWORD" not-null="true" length="50" />
+		<property name="realName" type="string" column="REAL_NAME" not-null="true" length="50" />
+		
+		<property name="sex" type="string" column="SEX" length="1" />
+		<property name="birthday" type="date" column="BIRTHDAY" />
+
+		<property name="telephone" type="string" column="TELEPHONE" length="20" not-null="true" />
+
+		<property name="lastLoginTime" type="date" column="LAST_LOGIN_TIME" />
+		<property name="lastLoginIp" type="string" column="LAST_LOGIN_IP" />
+
+		<property name="createTime" type="date" column="CREATE_TIME" not-null="true" />
+		<property name="lastModified" type="date" column="LAST_MODIFIED" />
+		<property name="status" type="string" column="STATUS" not-null="true" length="2" />
+	</class>
+</hibernate-mapping>
