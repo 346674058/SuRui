@@ -1,0 +1,2 @@
+INSERT INTO myit.t_sys_user(USER_NAME, PASSWORD, REAL_NAME, TELEPHONE, LAST_LOGIN_TIME,CREATE_TIME, LAST_MODIFIER, LAST_MODIFIED, STATUS)
+VALUES('admin', 'passw0rd', 'уехЩ', '18651661111',null, timestamp('2013-09-26'),'root' , timestamp('2013-09-26'), '1');
