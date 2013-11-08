@@ -1,0 +1,45 @@
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
+#line-chart {
+	height: 300px;
+	width: 800px;
+	margin: 0px auto;
+	margin-top: 1em;
+}
+
+.brand {
+	font-family: georgia, serif;
+}
+
+.brand .first {
+	color: #ccc;
+	font-style: italic;
+}
+
+.brand .second {
+	color: #fff;
+	font-weight: bold;
+}
+
+/*form validate*/
+.error{color:#ff0000;margin-left:10px;}
+input.error{background-color: #F5C9A3;}
+.success{color:#04AD53;margin-left:10px;}
+
+.loading{margin:3px;pading:5px; padding-left:20px;background: url("../images/loading.gif") no-repeat;}
+
+/*panel*/
+.panel{margin:5px 0px; padding:3px 0xp;}
+
+/*button*/
+.btn i{margin-right: 5px;}
