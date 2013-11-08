@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/freemarker/common/ajaxResult.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/common/footer.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/common/header.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/common/res.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/exception/error-exception.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/index.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/member/login.ftl=UTF-8
+encoding//src/main/webapp/WEB-INF/freemarker/member/regist.ftl=UTF-8
