@@ -47,13 +47,34 @@
 		<property name="serviceInterface"
 			value="com.myit.intf.service.commodity.CommodityService" />
 	</bean>
+	<bean name="/commCategory"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<!-- service引用具体的实现实体Bean -->
+		<property name="service" ref="commCategoryService" />
+		<property name="serviceInterface"
+			value="com.myit.intf.service.commCategory.CommCategoryService" />
+	</bean>
+	<bean name="/district"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<!-- service引用具体的实现实体Bean -->
+		<property name="service" ref="districtService" />
+		<property name="serviceInterface"
+			value="com.myit.intf.service.district.DistrictService" />
+	</bean>
+	
 	<bean name="/orderInfo"
 		class="org.springframework.remoting.caucho.HessianServiceExporter">
 		<!-- service引用具体的实现实体Bean -->
 		<property name="service" ref="orderInfoService" />
 		<property name="serviceInterface" value="com.myit.intf.service.bill.OrderInfoService" />
 	</bean>
-
+	
+	<bean name="/redis"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<!-- service引用具体的实现实体Bean -->
+		<property name="service" ref="redisService" />
+		<property name="serviceInterface" value="com.myit.intf.service.cache.RedisService" />
+	</bean>
 	<bean name="/operateLog"
 		class="org.springframework.remoting.caucho.HessianServiceExporter">
 		<!-- service引用具体的实现实体Bean -->
