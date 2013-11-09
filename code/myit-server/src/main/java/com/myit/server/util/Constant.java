@@ -50,10 +50,8 @@ public class Constant {
      */
     public static final Map<String, String> baseDataStatu;
 
-    /**
-     * 订单物品分类状态
-     */
-    public static final Map<String, String> goodsCatalog;
+    // 缓存key
+    public static final Map<String, String> cacheKey;
 
     static {
         baseDataStatu = new HashMap<String, String>();
@@ -75,10 +73,9 @@ public class Constant {
         orderStatus.put("5", "签收");
         orderStatus.put("6", "结算");
 
-        goodsCatalog = new HashMap<String, String>();
-        goodsCatalog.put("0", "普通");
-        goodsCatalog.put("1", "高单价");
-        goodsCatalog.put("2", "高质量");
+        cacheKey = new HashMap<String, String>();
+        cacheKey.put("CommodityCategory", "COMMODITY_CATEGORY");// 商品分类缓存key
+        cacheKey.put("OrderStatus", "ORDER_STATUS");// 订单状态缓存key
 
     }
 
