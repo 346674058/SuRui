@@ -102,8 +102,13 @@ public class SearchCommodityResp extends BaseModel implements Serializable {
 
     @Override
     public String toString() {
+        int size=0;
+        if (commodities!=null) {
+            size=commodities.size();
+        }
+        
         return "CommodityListResp [pageNo=" + pageNo + ", pageSize=" + pageSize + ", pageCount=" + pageCount
-                + ", total=" + total + ", commodities.size=" + commodities.size() + "]";
+                + ", total=" + total + ", commodities.size=" + size + "]";
     }
 
 }

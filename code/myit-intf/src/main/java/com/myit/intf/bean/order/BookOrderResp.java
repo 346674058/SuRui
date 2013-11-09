@@ -92,7 +92,7 @@ public class BookOrderResp extends BaseModel implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderInfoReq [orderNo=" + orderNo + ", authValid=" + authValid + ", appCode=" + this.getAppCode() + "]";
+        return "OrderInfoReq [orderNo=" + orderNo + ", authValid=" + authValid + ", appCode=" + getAppCode() + "]";
     }
 
 }

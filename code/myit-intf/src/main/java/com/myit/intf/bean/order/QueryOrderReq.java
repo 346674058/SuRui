@@ -125,4 +125,16 @@ public class QueryOrderReq extends BaseModel implements Serializable {
         this.orderItems = orderItems;
     }
 
+    @Override
+    public String toString() {
+        int size = 0;
+        if (orderItems != null) {
+            size = orderItems.size();
+        }
+
+        return "QueryOrderReq [orderNo=" + orderNo + ", memberNo=" + memberNo + ", contact=" + contact + ", mobile="
+                + mobile + ", address=" + address + ", totalPrice=" + totalPrice + ", status=" + status
+                + ", bookingTime=" + bookingTime + ", orderItems.size=" + size + ", appCode=" + getAppCode() + "]";
+    }
+
 }
