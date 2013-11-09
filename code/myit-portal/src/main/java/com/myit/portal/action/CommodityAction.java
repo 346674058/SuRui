@@ -18,10 +18,12 @@ import com.myit.intf.bean.commCategory.CommCategoryResp;
 import com.myit.intf.bean.commodity.CommodityItem;
 import com.myit.intf.bean.commodity.SearchCommodityReq;
 import com.myit.intf.bean.commodity.SearchCommodityResp;
+import com.myit.intf.bean.district.DistrictReq;
+import com.myit.intf.bean.district.DistrictResp;
 import com.myit.intf.service.commCategory.CommCategoryService;
 import com.myit.intf.service.commodity.CommodityService;
+import com.myit.intf.service.district.DistrictService;
 import com.myit.portal.action.bean.Commodity;
-import com.myit.portal.action.bean.CommodityCategory;
 
 /**
  * 
@@ -44,6 +46,9 @@ public class CommodityAction extends BaseAction {
     @Resource
     CommCategoryService commCategoryService;
 
+    @Resource
+    DistrictService districtService;
+
     /**
      * 
      * 功能描述: <br>
@@ -59,37 +64,41 @@ public class CommodityAction extends BaseAction {
     public String search(Model model, HttpServletRequest request) {
         LOGGER.info("search IN");
 
-        // 查询参数，返回到页面上，ajax表单提交做数据查询
-
         // 从缓存中取出所有商品分类列表
         CommCategoryReq commCategoryReq = new CommCategoryReq();
-        CommCategoryResp commCategoryResp = commCategoryService.getCommodityCategorys(commCategoryReq);
+
+        CommCategoryResp commCategoryResp = null;
+        try {
+            commCategoryResp = commCategoryService.getCommCategories(commCategoryReq);
+        } catch (Exception e) {
+            LOGGER.warn("getCommCategories failed,commCategoryReq=" + commCategoryReq, e);
+        }
+
+        LOGGER.debug("commCategoryResp=" + commCategoryResp);
+
+        // 查询成功
+        if (commCategoryResp != null && RetCode.SUCCESS.equals(commCategoryResp.getRetCode())) {
+            model.addAttribute("categories", commCategoryResp.getCategoryItems());
+        }
+
+        // 从缓存中取出当前城市区域列表
+        DistrictReq districtReq = new DistrictReq();
+        DistrictResp districtResp = null;
+        try {
+            districtResp = districtService.getDistricts(districtReq);
+        } catch (Exception e) {
+            LOGGER.warn("getDistricts failed,districtReq=" + districtReq, e);
+        }
+
+        LOGGER.debug("districtResp=" + districtResp);
+
+        // 查询成功
+        if (districtResp != null && RetCode.SUCCESS.equals(districtResp.getRetCode())) {
+            model.addAttribute("districts", districtResp.getDistrictItems());
+        }
 
         LOGGER.info("search OUT");
         return "commodity/search.ftl";
-    }
-
-    /**
-     * 
-     * 功能描述: <br>
-     * 获取缓存数据
-     * 
-     * @param string
-     * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
-     */
-    private Object getCacheData(String string) {
-        List<CommodityCategory> categories = new ArrayList<CommodityCategory>();
-
-        // TODO 测试数据
-        categories.add(new CommodityCategory("001", "商务套餐A"));
-        categories.add(new CommodityCategory("002", "商务套餐B"));
-        categories.add(new CommodityCategory("003", "商务套餐C"));
-        categories.add(new CommodityCategory("004", "商务套餐D"));
-        categories.add(new CommodityCategory("005", "商务套餐E"));
-
-        return categories;
     }
 
     /**
