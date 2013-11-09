@@ -13,11 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myit.common.util.RetCode;
-import com.myit.intf.bean.commodity.CommodityListReq;
-import com.myit.intf.bean.commodity.CommodityListResp;
-import com.myit.intf.bean.commodity.CommodityListRespItem;
+import com.myit.intf.bean.commCategory.CommCategoryReq;
+import com.myit.intf.bean.commCategory.CommCategoryResp;
+import com.myit.intf.bean.commodity.CommodityItem;
+import com.myit.intf.bean.commodity.SearchCommodityReq;
+import com.myit.intf.bean.commodity.SearchCommodityResp;
+import com.myit.intf.service.commCategory.CommCategoryService;
 import com.myit.intf.service.commodity.CommodityService;
 import com.myit.portal.action.bean.Commodity;
+import com.myit.portal.action.bean.CommodityCategory;
 
 /**
  * 
@@ -37,6 +41,9 @@ public class CommodityAction extends BaseAction {
     @Resource
     CommodityService commodityService;
 
+    @Resource
+    CommCategoryService commCategoryService;
+
     /**
      * 
      * 功能描述: <br>
@@ -54,8 +61,35 @@ public class CommodityAction extends BaseAction {
 
         // 查询参数，返回到页面上，ajax表单提交做数据查询
 
+        // 从缓存中取出所有商品分类列表
+        CommCategoryReq commCategoryReq = new CommCategoryReq();
+        CommCategoryResp commCategoryResp = commCategoryService.getCommodityCategorys(commCategoryReq);
+
         LOGGER.info("search OUT");
         return "commodity/search.ftl";
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 获取缓存数据
+     * 
+     * @param string
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private Object getCacheData(String string) {
+        List<CommodityCategory> categories = new ArrayList<CommodityCategory>();
+
+        // TODO 测试数据
+        categories.add(new CommodityCategory("001", "商务套餐A"));
+        categories.add(new CommodityCategory("002", "商务套餐B"));
+        categories.add(new CommodityCategory("003", "商务套餐C"));
+        categories.add(new CommodityCategory("004", "商务套餐D"));
+        categories.add(new CommodityCategory("005", "商务套餐E"));
+
+        return categories;
     }
 
     /**
@@ -73,12 +107,12 @@ public class CommodityAction extends BaseAction {
     public String list(Model model, HttpServletRequest request) {
         LOGGER.info("list IN");
 
-        CommodityListReq commodityListReq = new CommodityListReq();
+        SearchCommodityReq commodityListReq = new SearchCommodityReq();
 
         // 初始化请求参数
         initParam(commodityListReq, request);
 
-        CommodityListResp commodityListResp = null;
+        SearchCommodityResp commodityListResp = null;
         try {
             // 搜索商品列表
             commodityListResp = commodityService.findCommodities(commodityListReq);
@@ -130,7 +164,7 @@ public class CommodityAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    private void initParam(CommodityListReq commodityListReq, HttpServletRequest request) {
+    private void initParam(SearchCommodityReq commodityListReq, HttpServletRequest request) {
         // 商品分类
         String category = getParam("category", request);
         commodityListReq.setCategory(category);
@@ -159,7 +193,7 @@ public class CommodityAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    private List<Commodity> getCommodityList(List<CommodityListRespItem> commodities) {
+    private List<Commodity> getCommodityList(List<CommodityItem> commodities) {
         // TODO Auto-generated method stub
         return null;
     }

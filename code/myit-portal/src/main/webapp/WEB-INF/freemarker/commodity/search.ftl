@@ -40,7 +40,7 @@
 		<div class="rec_area banner" style="height: auto;">
 		    <div id="categorys" class="field" style="padding-top:15px;">美食分类:
 			    <a id="all_cate" href="#" title="全部分类" class="cur">全部</a>
-		    	<#list categorys as category>
+		    	<#list categories as category>
 				    <a id="${category.code}" name="${category.code}" href="#" title="${category.name}" >${category.name}</a>
 		    	</#list>
 		    </div>
