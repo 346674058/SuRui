@@ -14,7 +14,7 @@ import com.myit.common.beans.BaseModel;
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
-public class CommodityListResp extends BaseModel implements Serializable {
+public class SearchCommodityResp extends BaseModel implements Serializable {
     /**
      * generate sid
      */
@@ -33,9 +33,9 @@ public class CommodityListResp extends BaseModel implements Serializable {
     private int total;
 
     // 结果集
-    private List<CommodityListRespItem> commodities;
+    private List<CommodityItem> commodities;
 
-    public CommodityListResp() {
+    public SearchCommodityResp() {
     }
 
     public int getPageNo() {
@@ -62,11 +62,11 @@ public class CommodityListResp extends BaseModel implements Serializable {
         this.pageCount = pageCount;
     }
 
-    public List<CommodityListRespItem> getCommodities() {
+    public List<CommodityItem> getCommodities() {
         return commodities;
     }
 
-    public void setCommodities(List<CommodityListRespItem> commodities) {
+    public void setCommodities(List<CommodityItem> commodities) {
         this.commodities = commodities;
     }
 
@@ -94,7 +94,7 @@ public class CommodityListResp extends BaseModel implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CommodityListResp other = (CommodityListResp) obj;
+        SearchCommodityResp other = (SearchCommodityResp) obj;
         if (this.getId() != other.getId())
             return false;
         return true;

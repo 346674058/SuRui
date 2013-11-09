@@ -1,7 +1,7 @@
 package com.myit.intf.service.commodity;
 
-import com.myit.intf.bean.commodity.CommodityListReq;
-import com.myit.intf.bean.commodity.CommodityListResp;
+import com.myit.intf.bean.commodity.SearchCommodityReq;
+import com.myit.intf.bean.commodity.SearchCommodityResp;
 
 /**
  * 商品管理业务处理接口<br>
@@ -22,5 +22,5 @@ public interface CommodityService {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    CommodityListResp findCommodities(CommodityListReq commodityListReq) throws Exception;
+    SearchCommodityResp findCommodities(SearchCommodityReq commodityListReq) throws Exception;
 }

@@ -11,7 +11,7 @@ import com.myit.common.beans.BaseModel;
  * @author created by LiuCongwen at 2012-4-24
  * @version 1.0.0
  */
-public class CommodityListRespItem extends BaseModel implements Serializable {
+public class CommodityItem extends BaseModel implements Serializable {
     /**
      * generate sid
      */
