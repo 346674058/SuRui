@@ -1,5 +1,6 @@
 /RES/
 /index
+/error
 /member/regist
 /member/checkMemberExsit
 /member/saveRegist
