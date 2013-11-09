@@ -7,12 +7,12 @@ public interface CommCategoryService {
     /**
      * 
      * 功能描述: <br>
-     * 获取商品分类列表
+     * 获取城市行政区列表
      * 
      * @param req
      * @return
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    CommCategoryResp getCommodityCategorys(CommCategoryReq req);
+    CommCategoryResp getCommCategories(CommCategoryReq req);
 }
