@@ -25,10 +25,10 @@ import com.myit.server.model.member.MemberInfo;
  * @author created by LiuCongwen at 2012-4-24
  * @version 1.0.0
  */
-@Service("customDao")
+@Service("memberInfoDao")
 public class MemberInfoDaoImpl extends HibernateDaoSupport implements MemberInfoDao {
 
-    private Logger logger = Logger.getLogger(this.getClass());
+    private final static Logger LOGGER = Logger.getLogger(MemberInfoDaoImpl.class);
 
     @Autowired
     public void setSessionFactoryOverride(SessionFactory sessionFactory) {
@@ -36,65 +36,65 @@ public class MemberInfoDaoImpl extends HibernateDaoSupport implements MemberInfo
     }
 
     public MemberInfo findMemberInfoById(String id) throws Exception {
-        logger.info("method in.");
+        LOGGER.info("method in.");
 
         MemberInfo memberInfo = null;
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("id=" + id);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("id=" + id);
         }
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute findById");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("execute findById");
         }
 
         // 调用HibernateDaoSupport实现类方法执行查询
         getHibernateTemplate().get(MemberInfo.class, id);
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("memberInfo=" + memberInfo);
         }
-        logger.info("method out.");
+        LOGGER.info("method out.");
         return null;
     }
 
     public List<MemberInfo> findAllMemberInfos() throws Exception {
-        logger.info("method in.");
+        LOGGER.info("method in.");
 
         // TODO Auto-generated method stub
 
-        logger.info("method out.");
+        LOGGER.info("method out.");
         return null;
     }
 
     public int getMemberInfosCount(MemberInfo memberInfo, Map<String, Object> param) throws Exception {
-        logger.info("method in.");
+        LOGGER.info("method in.");
 
         // TODO Auto-generated method stub
 
-        logger.info("method out.");
+        LOGGER.info("method out.");
         return 0;
     }
 
     public List<MemberInfo> findMemberInfos(int start, int end, MemberInfo memberInfo, Map<String, Object> param)
             throws Exception {
-        logger.info("method in.");
+        LOGGER.info("method in.");
 
         // TODO Auto-generated method stub
 
-        logger.info("method out.");
+        LOGGER.info("method out.");
         return null;
     }
 
     public boolean persistMemberInfo(MemberInfo memberInfo) throws Exception {
-        logger.info("persistMemberInfo in.");
+        LOGGER.info("persistMemberInfo in.");
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("memberInfo=" + memberInfo);
         }
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute persist");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("execute persist");
         }
 
         DateConvert dateConvert = new DateConvert();
@@ -109,32 +109,32 @@ public class MemberInfoDaoImpl extends HibernateDaoSupport implements MemberInfo
         // 调用HibernateDaoSupport实现类方法执行查询
         getHibernateTemplate().saveOrUpdate(memberInfo);
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("memberInfo=" + memberInfo);
         }
 
-        logger.info("persistMemberInfo out.");
+        LOGGER.info("persistMemberInfo out.");
         return true;
     }
 
     public MemberInfo findMemberInfosByAccount(String account) throws Exception {
-        logger.info("findMemberInfosByAccount IN");
+        LOGGER.info("findMemberInfosByAccount IN");
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("account=" + account);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("account=" + account);
         }
 
         if (StringConvert.isEmpty(account)) {
-            logger.warn("account is null");
+            LOGGER.warn("account is null");
 
-            logger.info("findMemberInfosByAccount OUT");
+            LOGGER.info("findMemberInfosByAccount OUT");
             return null;
         }
 
         String queryString = "from MemberInfo where account='" + account + "'";
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute query, queryString=" + queryString);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("execute query, queryString=" + queryString);
         }
         // 调用HibernateDaoSupport实现类方法执行查询
         @SuppressWarnings("unchecked")
@@ -146,11 +146,11 @@ public class MemberInfoDaoImpl extends HibernateDaoSupport implements MemberInfo
             memberInfo = memberInfos.get(0);
         }
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("memberInfo=" + memberInfo);
         }
 
-        logger.info("findMemberInfosByUId out");
+        LOGGER.info("findMemberInfosByUId out");
         return memberInfo;
     }
 
