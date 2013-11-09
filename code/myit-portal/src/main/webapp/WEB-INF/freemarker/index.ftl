@@ -12,7 +12,8 @@
 	<#-- 引入css，不影响页面加载 -->
 	<#assign css =['css/common',
 		'css/selector',
-		'css/tab'
+		'css/tab',
+		'css/sonline/skin/default_blue'
 				]>
 	<@res.css url =css />
 	
@@ -109,25 +110,25 @@
 		<#-- 浮动工具栏 -->
 		<div class="sidebar" id="sidebar">
 			<a href="${base}/commodity/shoppingCart.htm" target="_self" title="添加到购物车" class="sidebar_icon_word_02"><div class="sidebar_word">购物车</div></a>
-			<a href="${base}/navigation/onlineService.htm" target="_blank" title="问题处理、疑问解答..." class="sidebar_icon_word_04"><div class="sidebar_word">在线客服</div></a>
 			<a href="#" title="返回顶部"><div class="sidebar_back"></div></a>
 		</div>
+		
+		<#-- 最后引入js，防止阻塞页面加载 -->
+		<#assign js = ["js/jquery/jquery-1.7.2.min",
+			"js/jquery.tab",
+			"js/jquery.tabChg",
+			"js/jquery.slide",
+			"js/jquery.sonline",
+			"js/data/citys",
+			"js/selector",
+			"js/common",
+			
+			"js/custom/index"
+		] >
+		<@res.js url = js />
 		
 		<#-- 页脚 -->
 		<#include "/common/footer.ftl">
 	</body>
-	
-	<#-- 最后引入js，防止阻塞页面加载 -->
-	<#assign js = ["js/jquery/jquery.min",
-		"js/jquery.tab",
-		"js/jquery.tabChg",
-		"js/jquery.slide",
-		"js/data/citys",
-		"js/selector",
-		"js/common",
-		
-		"js/custom/index"
-	] >
-	<@res.js url = js />
 
 </html>

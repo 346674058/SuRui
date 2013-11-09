@@ -40,9 +40,11 @@
 		<div class="rec_area banner" style="height: auto;">
 		    <div id="categorys" class="field" style="padding-top:15px;">美食分类:
 			    <a id="all_cate" href="#" title="全部分类" class="cur">全部</a>
+			    <#if categories?exists>
 		    	<#list categories as category>
-				    <a id="${category.code}" name="${category.code}" href="#" title="${category.name}" >${category.name}</a>
+				    <a id="${category.categoryCode}" name="${category.categoryCode}" href="#" title="${category.categoryName}" >${category.categoryName}</a>
 		    	</#list>
+		    	</#if>
 		    </div>
 		    
 		   	<div id="priceRange" class="field">价格范围:
@@ -54,9 +56,11 @@
 		    </div>
 		    <div id="dispatchArea" class="field">配送区域:
 		    	<a id="all_area" href="#" title="全部区域" class="cur">全部</a>
-		    	<#list hotAreas as area>
-				    <a id="${area.code}" name="${area.code}" href="#" title="${area.name}" >${area.name}</a>
-		    	</#list>			    
+		    	<#if categories?exists>
+		    	<#list districts as district>
+				    <a id="${district.districtCode}" name="${district.districtCode}" href="#" title="${district.districtName}" >${district.districtName}</a>
+		    	</#list>
+		    	</#if>			    
 			    <a id="more" href="##" title="点击查看更多区域" >更多..</a>
 			    
 			    <#-- 区域列表 -->
@@ -93,7 +97,7 @@
 </body>
 
 <#-- 最后引入js，防止阻塞页面加载 -->
-<#assign js = ["js/jquery/jquery.min",
+<#assign js = ["js/jquery/jquery-1.7.1.min",
 	"js/jquery.tab",
 	"js/pagnation",
 	"js/jquery.tabChg",
