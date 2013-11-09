@@ -13,6 +13,7 @@ public class RedisServiceImpl implements RedisService {
     private static final Logger LOGGER = Logger.getLogger(RedisServiceImpl.class);
 
     private String host;
+    private int port;
 
     JedisPool pool;
     Jedis jedis;
@@ -20,7 +21,7 @@ public class RedisServiceImpl implements RedisService {
     private void init() {
         if (pool == null) {
             try {
-                pool = new JedisPool(new JedisPoolConfig(), host);
+                pool = new JedisPool(new JedisPoolConfig(), host, port);
                 jedis = pool.getResource();
             } catch (Exception e) {
                 LOGGER.error("jedis init falied", e);
@@ -66,6 +67,22 @@ public class RedisServiceImpl implements RedisService {
             LOGGER.warn("del redis object failed,key=" + key, e);
         }
 
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
 }
