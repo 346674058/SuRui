@@ -12,6 +12,7 @@
 	<#-- 引入css，不影响页面加载 -->
 	<#assign css =['css/common',
 	'css/selector',
+	'css/sonline/skin/default_blue'
 	'css/tab'
 				]>
 	<@res.css url =css />
@@ -36,6 +37,7 @@
 			<input type="hidden" id="category" name="category" value="">
 			<input type="hidden" id="priceRange" name="priceRange" value="">
 			<input type="hidden" id="dispatchArea" name="dispatchArea" value="">
+			<input type="hidden" id="pageNo" name="pageNo" value="1">
 		</form>
 		<div class="rec_area banner" style="height: auto;">
 		    <div id="categorys" class="field" style="padding-top:15px;">美食分类:
@@ -88,25 +90,27 @@
 	<#-- 浮动工具栏 -->
 	<div class="sidebar" id="sidebar">
 		<a href="${base}/commodity/shoppingCart.htm" target="_self" title="添加到购物车" class="sidebar_icon_word_02"><div class="sidebar_word">购物车</div></a>
-		<a href="${base}/navigation/onlineService.htm" target="_blank" title="问题处理、疑问解答..." class="sidebar_icon_word_04"><div class="sidebar_word">在线客服</div></a>
 		<a href="#" title="返回顶部"><div class="sidebar_back"></div></a>
 	</div>
+	
+	<#-- 最后引入js，防止阻塞页面加载 -->
+	<#assign js = ["js/jquery/jquery-1.7.2.min",
+		"js/jquery.tab",
+		"js/pagnation",
+		"js/jquery.tabChg",
+		"js/jquery.sonline",
+		"js/data/citys",
+		"js/selector",
+		
+		"js/common",
+		
+		"js/custom/commoditySearch"
+	] >
+	<@res.js url = js />
 	
 	<#-- 页脚 -->
 	<#include "/common/footer.ftl">
 </body>
 
-<#-- 最后引入js，防止阻塞页面加载 -->
-<#assign js = ["js/jquery/jquery-1.7.1.min",
-	"js/jquery.tab",
-	"js/pagnation",
-	"js/jquery.tabChg",
-	"js/data/citys",
-	"js/selector",
-	
-	"js/common",
-	
-	"js/custom/commoditySearch"
-] >
-<@res.js url = js />
+
 </html>

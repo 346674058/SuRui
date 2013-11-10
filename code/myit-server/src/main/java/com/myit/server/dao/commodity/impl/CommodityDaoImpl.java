@@ -4,20 +4,19 @@
  */
 package com.myit.server.dao.commodity.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
 
-import com.myit.common.util.DateConvert;
 import com.myit.common.util.StringConvert;
-import com.myit.server.dao.member.MemberInfoDao;
-import com.myit.server.model.member.MemberInfo;
+import com.myit.server.dao.commodity.CommodityDao;
+import com.myit.server.model.commodity.Commodity;
 
 /**
  * 客户数据访问接口实现类<br>
@@ -25,133 +24,108 @@ import com.myit.server.model.member.MemberInfo;
  * @author created by LiuCongwen at 2012-4-24
  * @version 1.0.0
  */
-@Service("customDao")
-public class CommodityDaoImpl extends HibernateDaoSupport implements MemberInfoDao {
+@Service("commodityDao")
+public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDao {
 
-    private Logger logger = Logger.getLogger(this.getClass());
+    private final static Logger LOGGER = Logger.getLogger(CommodityDaoImpl.class);
 
     @Autowired
     public void setSessionFactoryOverride(SessionFactory sessionFactory) {
         super.setSessionFactory(sessionFactory);
     }
 
-    public MemberInfo findMemberInfoById(String id) throws Exception {
-        logger.info("method in.");
+    public Commodity findCommodityById(Long id) throws Exception {
+        LOGGER.info("findCommodityById IN");
 
-        MemberInfo memberInfo = null;
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("id=" + id);
+        Commodity commodity = null;
+        try {
+            // 调用HibernateDaoSupport实现类方法执行查询
+            commodity = (Commodity) getHibernateTemplate().load(Commodity.class, id);
+        } catch (Exception e) {
+            LOGGER.warn("load entity failed, id=" + id, e);
         }
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute findById");
+        LOGGER.info("findCommodityById OUT");
+        return commodity;
+    }
+
+    public int getCommoditysCount(Commodity commodity, Map<String, Object> param) throws Exception {
+        LOGGER.info("getCommoditysCount IN");
+
+        StringBuffer queryString = new StringBuffer("select count(ID) from Commodity o where 1=1");
+
+        // 动态拼接sql
+        queryString = getQueryString(queryString, commodity);
+
+        Query query = getSession().createQuery(queryString.toString());
+
+        if (commodity != null) {
+            query.setProperties(commodity);
         }
 
-        // 调用HibernateDaoSupport实现类方法执行查询
-        getHibernateTemplate().get(MemberInfo.class, id);
+        List<Long> counts = query.list();
+        int count = counts.get(0).intValue();
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
+        LOGGER.info("getCommoditysCount OUT");
+        return count;
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 动态组装查询语句
+     * 
+     * @param queryString
+     * @param order
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private StringBuffer getQueryString(StringBuffer queryString, Commodity commodity) {
+        LOGGER.info("getQueryString IN");
+
+        LOGGER.debug("queryString=" + queryString + ", commodity=" + commodity);
+
+        if (commodity != null) {
+            // 商品分类
+            if (!StringConvert.isEmpty(commodity.getCategoryId())) {
+                queryString.append(" and o.categoryId =:categoryId");
+            }
+            // 商品状态
+            if (!StringConvert.isEmpty(commodity.getStatus())) {
+                queryString.append(" and o.statu=:status");
+            }
+            // 商品名称
+            if (!StringConvert.isEmpty(commodity.getComName())) {
+                queryString.append(" and o.comName like '%:comName%'");
+            }
+            // 起始创建时间
+            if (!StringConvert.isEmpty(commodity.getStartTime())) {
+                queryString.append(" and o.createTime>=:startTime");
+            }
+            // 截至创建时间
+            if (!StringConvert.isEmpty(commodity.getEndTime())) {
+                queryString.append(" and o.createTime<=:endTime");
+            }
         }
-        logger.info("method out.");
-        return null;
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("queryString=" + queryString);
+        }
+
+        LOGGER.info("getQueryString OUT");
+        return queryString;
     }
 
-    public List<MemberInfo> findAllMemberInfos() throws Exception {
-        logger.info("method in.");
-
-        // TODO Auto-generated method stub
-
-        logger.info("method out.");
-        return null;
-    }
-
-    public int getMemberInfosCount(MemberInfo memberInfo, Map<String, Object> param) throws Exception {
-        logger.info("method in.");
-
-        // TODO Auto-generated method stub
-
-        logger.info("method out.");
-        return 0;
-    }
-
-    public List<MemberInfo> findMemberInfos(int start, int end, MemberInfo memberInfo, Map<String, Object> param)
+    public List<Commodity> findCommodities(int start, int end, Commodity commodity, Map<String, Object> param)
             throws Exception {
-        logger.info("method in.");
-
         // TODO Auto-generated method stub
-
-        logger.info("method out.");
         return null;
     }
 
-    public boolean persistMemberInfo(MemberInfo memberInfo) throws Exception {
-        logger.info("persistMemberInfo in.");
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
-        }
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute persist");
-        }
-
-        DateConvert dateConvert = new DateConvert();
-        dateConvert.setPattern("yyyy-MM-dd hh:mm:ss");
-
-        memberInfo.setLastModified(new Date());
-
-        if (memberInfo.getId() == null) {// create
-            memberInfo.setCreateTime(new Date());
-        }
-
-        // 调用HibernateDaoSupport实现类方法执行查询
-        getHibernateTemplate().saveOrUpdate(memberInfo);
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
-        }
-
-        logger.info("persistMemberInfo out.");
-        return true;
-    }
-
-    public MemberInfo findMemberInfosByAccount(String account) throws Exception {
-        logger.info("findMemberInfosByAccount IN");
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("account=" + account);
-        }
-
-        if (StringConvert.isEmpty(account)) {
-            logger.warn("account is null");
-
-            logger.info("findMemberInfosByAccount OUT");
-            return null;
-        }
-
-        String queryString = "from MemberInfo where account='" + account + "'";
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("execute query, queryString=" + queryString);
-        }
-        // 调用HibernateDaoSupport实现类方法执行查询
-        @SuppressWarnings("unchecked")
-        List<MemberInfo> memberInfos = getHibernateTemplate().find(queryString);
-
-        MemberInfo memberInfo = null;
-
-        if (memberInfos != null && memberInfos.size() > 0) {
-            memberInfo = memberInfos.get(0);
-        }
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("memberInfo=" + memberInfo);
-        }
-
-        logger.info("findMemberInfosByUId out");
-        return memberInfo;
+    public boolean persistCommodity(Commodity commodity) throws Exception {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

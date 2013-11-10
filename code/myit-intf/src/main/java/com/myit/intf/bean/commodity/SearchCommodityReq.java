@@ -73,6 +73,9 @@ public class SearchCommodityReq extends BaseModel implements Serializable {
     }
 
     public int getPageNo() {
+        if (pageNo <= 0) {
+            pageNo = 1;
+        }
         return pageNo;
     }
 
@@ -81,6 +84,9 @@ public class SearchCommodityReq extends BaseModel implements Serializable {
     }
 
     public int getPageSize() {
+        if (pageSize <= 0) {
+            pageSize = 10;
+        }
         return pageSize;
     }
 

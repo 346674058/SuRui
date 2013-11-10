@@ -88,7 +88,7 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
     }
 
     public int getOrdersCount(OrderInfo order) throws Exception {
-        LOGGER.info("getOrdersCount in.");
+        LOGGER.info("getOrdersCount IN");
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("order=" + order);
@@ -116,7 +116,7 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
             LOGGER.debug("ordersCount=" + ordersCount);
         }
 
-        LOGGER.info("getOrdersCount out.");
+        LOGGER.info("getOrdersCount OUT");
         return ordersCount;
     }
 
@@ -130,7 +130,7 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
      * @return
      */
     private StringBuffer getQueryString(StringBuffer queryString, OrderInfo order) {
-        LOGGER.info("getQueryString in");
+        LOGGER.info("getQueryString IN");
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("queryString=" + queryString + ", order=" + order);
@@ -167,7 +167,7 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
             LOGGER.debug("queryString=" + queryString);
         }
 
-        LOGGER.info("getQueryString out");
+        LOGGER.info("getQueryString OUT");
         return queryString;
     }
 

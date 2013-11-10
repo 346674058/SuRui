@@ -36,26 +36,19 @@ public class MemberInfoDaoImpl extends HibernateDaoSupport implements MemberInfo
     }
 
     public MemberInfo findMemberInfoById(String id) throws Exception {
-        LOGGER.info("method in.");
+        LOGGER.info("findMemberInfoById IN");
 
         MemberInfo memberInfo = null;
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("id=" + id);
+        try {
+            // 调用HibernateDaoSupport实现类方法执行查询
+            memberInfo = (MemberInfo) getHibernateTemplate().load(MemberInfo.class, id);
+        } catch (Exception e) {
+            LOGGER.warn("load entity failed,id=" + id, e);
         }
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("execute findById");
-        }
-
-        // 调用HibernateDaoSupport实现类方法执行查询
-        getHibernateTemplate().get(MemberInfo.class, id);
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("memberInfo=" + memberInfo);
-        }
-        LOGGER.info("method out.");
-        return null;
+        LOGGER.info("findMemberInfoById OUT");
+        return memberInfo;
     }
 
     public List<MemberInfo> findAllMemberInfos() throws Exception {

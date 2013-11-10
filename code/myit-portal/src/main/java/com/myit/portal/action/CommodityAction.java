@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myit.common.util.RetCode;
+import com.myit.common.util.StringConvert;
 import com.myit.intf.bean.commCategory.CommCategoryReq;
 import com.myit.intf.bean.commCategory.CommCategoryResp;
 import com.myit.intf.bean.commodity.CommodityItem;
@@ -116,20 +117,20 @@ public class CommodityAction extends BaseAction {
     public String list(Model model, HttpServletRequest request) {
         LOGGER.info("list IN");
 
-        SearchCommodityReq commodityListReq = new SearchCommodityReq();
+        SearchCommodityReq searchCommodityReq = new SearchCommodityReq();
 
         // 初始化请求参数
-        initParam(commodityListReq, request);
+        initParam(searchCommodityReq, request);
 
-        SearchCommodityResp commodityListResp = null;
+        SearchCommodityResp searchCommodityResp = null;
         try {
             // 搜索商品列表
-            commodityListResp = commodityService.findCommodities(commodityListReq);
+            searchCommodityResp = commodityService.searchCommodities(searchCommodityReq);
         } catch (Exception e) {
-            LOGGER.warn("findCommodities failed", e);
+            LOGGER.warn("searchCommodities failed", e);
         }
 
-        LOGGER.debug("commodityListResp=" + commodityListResp);
+        LOGGER.debug("searchCommodityResp=" + searchCommodityResp);
 
         List<Commodity> commodities = null;
 
@@ -138,15 +139,15 @@ public class CommodityAction extends BaseAction {
         int totalCount = 0;
 
         // 搜索成功
-        if (commodityListResp != null && RetCode.SUCCESS.equals(commodityListResp.getRetCode())) {
+        if (searchCommodityResp != null && RetCode.SUCCESS.equals(searchCommodityResp.getRetCode())) {
             // 转换结果集
-            if (commodityListResp.getCommodities() != null) {
-                commodities = getCommodityList(commodityListResp.getCommodities());
+            if (searchCommodityResp.getCommodities() != null) {
+                commodities = getCommodityList(searchCommodityResp.getCommodities());
             }
 
-            pageNo = commodityListResp.getPageNo();
-            pageCount = commodityListResp.getPageCount();
-            totalCount = commodityListResp.getTotal();
+            pageNo = searchCommodityResp.getPageNo();
+            pageCount = searchCommodityResp.getPageCount();
+            totalCount = searchCommodityResp.getTotal();
         }
 
         // 搜索无结果
@@ -173,23 +174,38 @@ public class CommodityAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    private void initParam(SearchCommodityReq commodityListReq, HttpServletRequest request) {
+    private void initParam(SearchCommodityReq searchCommodityReq, HttpServletRequest request) {
         // 商品分类
         String category = getParam("category", request);
-        commodityListReq.setCategory(category);
+        searchCommodityReq.setCategory(category);
 
         // 价格区间
         String priceRange = getParam("priceRange", request);
-        commodityListReq.setPriceRange(priceRange);
+        searchCommodityReq.setPriceRange(priceRange);
 
         // 配送区域
         String dispatchArea = getParam("dispatchArea", request);
-        commodityListReq.setDispatchArea(dispatchArea);
+        searchCommodityReq.setDispatchArea(dispatchArea);
 
         // 关键字
         String keywords = getParam("keywords", request);
-        commodityListReq.setKeywords(keywords);
+        searchCommodityReq.setKeywords(keywords);
 
+        // 页面大小
+        searchCommodityReq.setPageSize(10);
+
+        // 当前页号
+        int pageNo = 0;
+        String pageNoStr = getParam("pageNo", request);
+        if (!StringConvert.isEmpty(pageNoStr)) {
+            try {
+                pageNo = Integer.parseInt(pageNoStr);
+            } catch (Exception e) {
+                LOGGER.warn("parseInt failed,pageNoStr=" + pageNoStr, e);
+            }
+        }
+
+        searchCommodityReq.setPageNo(pageNo);
     }
 
     /**
