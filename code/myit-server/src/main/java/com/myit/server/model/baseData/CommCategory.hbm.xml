@@ -3,27 +3,19 @@
 <!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
 	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
 <hibernate-mapping>
-	<class name="com.myit.server.model.commodity.Commodity" table="T_COMMIDITY"
+	<class name="com.myit.server.model.commodity.Commodity" table="T_COMM_CATEGORY"
 		lazy="false">
 		<id name="id" type="long" column="ID">
 			<generator class="increment" />
 		</id>
 
-		<property name="comId" type="string" column="COM_ID" not-null="true" length="25" />
-		<property name="comName" type="string" column="COM_NAME" not-null="true" length="100" />
-		
-		<property name="providerId" type="long" column="PROVIDER_ID"/>
-		<property name="catagoryId" type="long" column="CATEGORY_ID"/>
-		<property name="comDescribe" type="string" column="COM_DESCRIBE"/>
+		<property name="categotyCode" type="string" column="CATEGORY_CODE" not-null="true" length="10" />
+		<property name="categotyName" type="string" column="CATEGORY_NAME" not-null="true" length="100" />
 
 		<property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />
 		<property name="lastModified" type="timestamp" column="LAST_MODIFIED"/>
 		<property name="lastModifier" type="string" column="LAST_MODIFIER"/>
 		<property name="status" type="string" column="STATUS" not-null="true" />
-		
-		<many-to-one name="provider" column="PROVIDER_ID" class="com.myit.server.model.provider.Provider" lazy="false" fetch="join"/>
-		
-		<many-to-one name="commCategory" column="CATEGORY_ID" class="com.myit.server.model.baseData.CommCategory" lazy="false" fetch="join"/>
 		
 	</class>
 </hibernate-mapping>

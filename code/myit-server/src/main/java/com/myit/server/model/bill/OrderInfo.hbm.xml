@@ -3,7 +3,7 @@
 <!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
 	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
 <hibernate-mapping>
-	<class name="com.myit.server.model.bill.OrderInfo" table="T_ORDER_ORDERINFO">
+	<class name="com.myit.server.model.bill.OrderInfo" table="T_ORDER">
 		<id name="id" type="long" column="ID">
 			<generator class="increment" />
 		</id>

@@ -88,8 +88,8 @@ public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDa
 
         if (commodity != null) {
             // 商品分类
-            if (!StringConvert.isEmpty(commodity.getCategoryId())) {
-                queryString.append(" and o.categoryId =:categoryId");
+            if (!StringConvert.isEmpty(commodity.getCommCategory())) {
+                queryString.append(" and o.commCategory.id =:categoryId");
             }
             // 商品状态
             if (!StringConvert.isEmpty(commodity.getStatus())) {
@@ -117,10 +117,38 @@ public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDa
         return queryString;
     }
 
-    public List<Commodity> findCommodities(int start, int end, Commodity commodity, Map<String, Object> param)
+    public List<Commodity> findCommodities(int start, int pageSize, Commodity commodity, Map<String, Object> param)
             throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        LOGGER.info("findCommodities IN");
+
+        LOGGER.debug("order=" + commodity);
+
+        StringBuffer queryString = new StringBuffer("from Commodity as o where 1=1");
+
+        // 动态拼接sql
+        queryString = getQueryString(queryString, commodity);
+
+        LOGGER.debug("queryString=" + queryString);
+
+        // 分页查询
+        Query query = getSession().createQuery(queryString.toString());
+
+        if (!StringConvert.isEmpty(commodity)) {
+            query.setProperties(commodity);
+        }
+
+        query.setFirstResult(start);
+        query.setMaxResults(pageSize);
+
+        List<Commodity> commodities = null;
+        try {
+            commodities = query.list();
+        } catch (Exception e) {
+            LOGGER.warn("query list failed", e);
+        }
+
+        LOGGER.info("findCommodities OUT");
+        return commodities;
     }
 
     public boolean persistCommodity(Commodity commodity) throws Exception {
