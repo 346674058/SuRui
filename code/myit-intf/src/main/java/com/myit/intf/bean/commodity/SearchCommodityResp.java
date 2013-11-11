@@ -38,6 +38,12 @@ public class SearchCommodityResp extends BaseModel implements Serializable {
     public SearchCommodityResp() {
     }
 
+    // 初始化返回页面和页面大小
+    public SearchCommodityResp(SearchCommodityReq req) {
+        this.pageNo = req.getPageNo();
+        this.pageSize = req.getPageSize();
+    }
+
     public int getPageNo() {
         return pageNo;
     }
@@ -55,6 +61,8 @@ public class SearchCommodityResp extends BaseModel implements Serializable {
     }
 
     public int getPageCount() {
+        pageCount = (this.total + this.pageSize - 1) / this.pageSize;
+
         return pageCount;
     }
 
@@ -102,13 +110,13 @@ public class SearchCommodityResp extends BaseModel implements Serializable {
 
     @Override
     public String toString() {
-        int size=0;
-        if (commodities!=null) {
-            size=commodities.size();
+        int size = 0;
+        if (commodities != null) {
+            size = commodities.size();
         }
-        
-        return "CommodityListResp [pageNo=" + pageNo + ", pageSize=" + pageSize + ", pageCount=" + pageCount
-                + ", total=" + total + ", commodities.size=" + size + "]";
+
+        return "CommodityListResp [pageNo=" + getPageNo() + ", pageSize=" + getPageSize() + ", pageCount="
+                + getPageCount() + ", total=" + getTotal() + ", commodities.size=" + size + "]";
     }
 
 }

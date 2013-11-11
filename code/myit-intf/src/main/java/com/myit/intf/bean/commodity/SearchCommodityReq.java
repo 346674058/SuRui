@@ -20,22 +20,22 @@ public class SearchCommodityReq extends BaseModel implements Serializable {
     private static final long serialVersionUID = -6838676106112859700L;
 
     // 商品分类
-    String category;
+    private String category;
 
     // 价格区间
-    String priceRange;
+    private String priceRange;
 
     // 配送区域
-    String dispatchArea;
+    private String dispatchArea;
 
     // 关键字
-    String keywords;
+    private String keywords;
 
     // 当前页数
-    int pageNo;
+    private int pageNo;
 
     // 页面大小
-    int pageSize;
+    private int pageSize;
 
     public SearchCommodityReq() {
     }
@@ -88,6 +88,10 @@ public class SearchCommodityReq extends BaseModel implements Serializable {
             pageSize = 10;
         }
         return pageSize;
+    }
+
+    public int getStart() {
+        return (getPageNo() - 1) * getPageSize();
     }
 
     public void setPageSize(int pageSize) {
