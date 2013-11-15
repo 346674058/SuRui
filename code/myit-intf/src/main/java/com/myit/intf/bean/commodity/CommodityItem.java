@@ -21,7 +21,7 @@ public class CommodityItem extends BaseModel implements Serializable {
     String comCode;
 
     // 商品名称
-    String commName;
+    String comName;
 
     // 商品图片
     String img;
@@ -60,12 +60,12 @@ public class CommodityItem extends BaseModel implements Serializable {
         this.comCode = comCode;
     }
 
-    public String getCommName() {
-        return commName;
+    public String getComName() {
+        return comName;
     }
 
-    public void setCommName(String commName) {
-        this.commName = commName;
+    public void setComName(String comName) {
+        this.comName = comName;
     }
 
     public String getImg() {

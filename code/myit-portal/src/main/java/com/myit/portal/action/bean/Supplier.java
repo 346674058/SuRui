@@ -23,6 +23,19 @@ public class Supplier implements Serializable {
     public Supplier() {
     }
 
+    /**
+     * 对象实例化
+     * 
+     * @param name
+     * @param mobile
+     * @param address
+     */
+    public Supplier(String name, String mobile, String address) {
+        this.name = name;
+        this.mobile = mobile;
+        this.address = address;
+    }
+
     public String getSupplierNo() {
         return supplierNo;
     }

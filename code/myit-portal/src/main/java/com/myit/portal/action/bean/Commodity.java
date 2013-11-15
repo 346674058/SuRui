@@ -13,7 +13,7 @@ public class Commodity implements Serializable {
     String comCode;
 
     // 商品名称
-    String name;
+    String comName;
 
     // 商品图片
     String img;
@@ -33,9 +33,9 @@ public class Commodity implements Serializable {
         // TODO Auto-generated constructor stub
     }
 
-    public Commodity(String comCode, String name, String img, BigDecimal price, BigDecimal promotionPrice) {
+    public Commodity(String comCode, String comName, String img, BigDecimal price, BigDecimal promotionPrice) {
         this.comCode = comCode;
-        this.name = name;
+        this.comName = comName;
         this.img = img;
         this.price = price;
         this.promotionPrice = promotionPrice;
@@ -57,12 +57,12 @@ public class Commodity implements Serializable {
         this.supplier = supplier;
     }
 
-    public String getName() {
-        return name;
+    public String getComName() {
+        return comName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setComName(String comName) {
+        this.comName = comName;
     }
 
     public String getImg() {

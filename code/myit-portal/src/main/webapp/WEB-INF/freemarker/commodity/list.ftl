@@ -7,15 +7,19 @@
 	<#else>
 	<tr class="item">
 	</#if>
-		<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" ><img src="${resRoot}/${commodity.img}"></a></td>
-		
+		<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" >
+			<#if commodity.img?exists>
+			<img src="${commodity.img}" width="120px" height="120px;"></a></td>
+			<#else>
+			<img src="${resRoot}/img/default.jpg" width="120px" height="120px;"></a></td>
+			</#if>
 		<td class="commodity-info">
-			<div class="name"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.name}</a></div>
+			<div class="name"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.comName}</a></div>
 			<#if commodity.supplier?exists>
 			<div class="supply-info">
-				<label>商户</label>${commodity.supply.name}<br>
-				<label>电话</label>${commodity.supply.telephone}<br>
-				<label>地址</label>${commodity.supply.address}
+				<label>商户</label>${commodity.supplier.name}<br>
+				<label>电话</label>${commodity.supplier.telephone}<br>
+				<label>地址</label>${commodity.supplier.address}
 			</div>
 			</#if>
 		</td>
@@ -60,10 +64,8 @@
 	
 	$("#totalCount").text("${totalCount}");
 	
-	
-	// 1小时倒计时
-	timeEnd(3599, "#timer_201309190001");
-	
 	//分页
-	showPagenation(pageNo, pageCount, ".pagenation");
+	if(NaN(pageCount) && pageCount>1){
+		showPagenation(pageNo, pageCount, ".pagenation");
+	}
 </script>

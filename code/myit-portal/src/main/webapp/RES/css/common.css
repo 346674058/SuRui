@@ -166,22 +166,6 @@ a:hover{ text-decoration:none; color:#f60;}
     line-height:40px;
     text-align:center;
 }
-.menu .menu_biz{
-    width:168px;
-    height:40px;
-    background:url('../img/menu_biz_bg.png') no-repeat;
-}
-.menu .menu_biz a{
-    color:white;
-    font-size:14px;
-    height:40px;
-    line-height:40px;
-    margin-left:70px;
-    background-color:#006CCB;
-}
-.menu .menu_biz a:hover{
-    background-color:#006CCB;
-}
 
 .footerCon{ background-color: #F3F3F3/*FFFFFF*/; border-top: 1px solid #CCCCCC; height: 110px; margin-top: 20px; width: 100%;}
 .footer{ width:960px; height:60px;}

@@ -12,8 +12,6 @@
 		<property name="comId" type="string" column="COM_ID" not-null="true" length="25" />
 		<property name="comName" type="string" column="COM_NAME" not-null="true" length="100" />
 		
-		<property name="providerId" type="long" column="PROVIDER_ID"/>
-		<property name="catagoryId" type="long" column="CATEGORY_ID"/>
 		<property name="comDescribe" type="string" column="COM_DESCRIBE"/>
 
 		<property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />

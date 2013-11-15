@@ -3,28 +3,19 @@
 <!-- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 
 	3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> -->
 <hibernate-mapping>
-	<class name="com.myit.server.model.member.MemberInfo" table="T_MEMBER"
+	<class name="com.myit.server.model.provider.Provider" table="T_COMM_PROVIDER"
 		lazy="false">
 		<id name="id" type="long" column="ID">
 			<generator class="increment" />
 		</id>
 
-		<property name="account" type="string" column="ACCOUNT" not-null="true" length="20" />
-		<property name="password" type="string" column="PASSWORD" not-null="true" length="50" />
+		<property name="providerCode" type="string" column="PROVIDER_CODE" not-null="true" length="10" />
+		<property name="providerName" type="string" column="PROVIDER_NAME" not-null="true" length="50" />
 		
-		<property name="nick" type="string" column="NICK" length="50" />
-		<property name="sex" type="string" column="SEX" length="1" />
-		<property name="birthday" type="date" column="BIRTHDAY" />
-		
+		<property name="providerDescribe" type="string" column="PROVIDER_DESCRIBE" length="50" />
+		<property name="contactor" type="string" column="CONTACTOR" length="50" />
 		<property name="mobile" type="string" column="MOBILE" length="20" not-null="true"/>
-		<property name="email" type="string" column="EMAIL" length="50" />
-
-		<property name="lastLoginTime" type="timestamp" column="LAST_LOGIN_TIME" />
-		<property name="lastLoginIp" type="string" column="LAST_LOGIN_IP" length="20" />
-
-		<property name="province" type="string" column="PROVINCE" not-null="true" />
-		<property name="city" type="string" column="CITY" not-null="true"/>
-		<property name="area" type="string" column="AREA" not-null="true"/>
+		
 		<property name="address" type="string" column="ADDRESS" not-null="true"/>
 
 		<property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />

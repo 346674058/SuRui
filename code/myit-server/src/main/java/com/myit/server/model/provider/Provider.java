@@ -1,13 +1,11 @@
 package com.myit.server.model.provider;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import com.myit.common.beans.BaseModel;
 
 /**
- * 用户实体类<br>
+ * 供应商实体类<br>
  * 
  * @author created by LiuCongwen at 2012-4-24
  * @version 1.0.0
@@ -16,139 +14,73 @@ public class Provider extends BaseModel implements Serializable {
     /** generate sid **/
     private static final long serialVersionUID = -6838676106112859700L;
 
-    /** 会员账户 **/
-    private String account;
-
-    /** 密码 **/
-    private String password;
-
-    /** 昵称 **/
-    private String nick;
-
-    /** 性别 **/
-    private String sex;
-
-    /** 生日 **/
-    private Date birthday;
-
-    /** 省 **/
-    private String province;
-    /** 市 **/
-    private String city;
-    /** 区县 **/
-    private String area;
-
-    /** 地址 **/
-    private String address;
-
-    /** 电子邮件 **/
-    private String email;
-
-    /** 手机 **/
+    // 商户编码
+    private String providerCode;
+    // 商户名称',
+    private String providerName;
+    // 商户描述',
+    private String providerDescribe;
+    // 联系人',
+    private String contactor;
+    // 联系电话',
     private String mobile;
-
-    /** 上次登录时间 **/
-    private Timestamp lastLoginTime;
-
-    /** 手机 **/
-    private String lastLoginIp;
+    // 商户地址',
+    private String address;
 
     public Provider() {
     }
 
-    public Provider(Long id, String account, String nick, String sex, Timestamp birthday, String province,
-            String city, String area, String address, String email, String telephone, String mobile) {
-        this.setId(id);
-        this.account = account;
-        this.nick = nick;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.province = province;
-        this.city = city;
-        this.area = area;
-        this.address = address;
-        this.email = email;
+    /**
+     * 供应商实体初始化
+     * 
+     * @param providerCode
+     * @param providerName
+     * @param providerDescribe
+     * @param contactor
+     * @param mobile
+     * @param address
+     */
+    public Provider(String providerCode, String providerName, String providerDescribe, String contactor, String mobile,
+            String address) {
+        super();
+        this.providerCode = providerCode;
+        this.providerName = providerName;
+        this.providerDescribe = providerDescribe;
+        this.contactor = contactor;
         this.mobile = mobile;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNick() {
-        return nick;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
+    public String getProviderCode() {
+        return providerCode;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setProviderCode(String providerCode) {
+        this.providerCode = providerCode;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public String getProviderDescribe() {
+        return providerDescribe;
+    }
+
+    public void setProviderDescribe(String providerDescribe) {
+        this.providerDescribe = providerDescribe;
+    }
+
+    public String getContactor() {
+        return contactor;
+    }
+
+    public void setContactor(String contactor) {
+        this.contactor = contactor;
     }
 
     public String getMobile() {
@@ -159,49 +91,12 @@ public class Provider extends BaseModel implements Serializable {
         this.mobile = mobile;
     }
 
-    public Timestamp getLastLoginTime() {
-        return lastLoginTime;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLastLoginTime(Timestamp lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+    public void setAddress(String address) {
+        this.address = address;
     }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (this.getId() ^ (this.getId() >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Provider other = (Provider) obj;
-        if (this.getId() != other.getId())
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Custom [id=" + this.getId() + ", account=" + account + ", nick=" + nick + ", sex=" + sex
-                + ", birthday=" + birthday + ", province=" + province + ", city=" + city + ", area=" + area
-                + ", address=" + address + ", email=" + email + ", mobile=" + mobile + "]";
-    }
-
+    
 }

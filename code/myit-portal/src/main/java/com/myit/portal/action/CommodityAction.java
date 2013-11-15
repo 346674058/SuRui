@@ -25,6 +25,7 @@ import com.myit.intf.service.commCategory.CommCategoryService;
 import com.myit.intf.service.commodity.CommodityService;
 import com.myit.intf.service.district.DistrictService;
 import com.myit.portal.action.bean.Commodity;
+import com.myit.portal.action.bean.Supplier;
 
 /**
  * 
@@ -218,9 +219,39 @@ public class CommodityAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    private List<Commodity> getCommodityList(List<CommodityItem> commodities) {
-        // TODO Auto-generated method stub
-        return null;
+    private List<Commodity> getCommodityList(List<CommodityItem> commodityItems) {
+        LOGGER.info("getcommodityList IN");
+
+        // 检查入参
+        if (commodityItems == null) {
+            LOGGER.warn("commodities is null");
+
+            LOGGER.info("getcommodityList IN");
+            return null;
+        }
+
+        List<Commodity> commodities = new ArrayList<Commodity>();
+
+        for (CommodityItem commodityItem : commodityItems) {
+            Commodity commodity = new Commodity();
+
+            // 商品基本信息
+            commodity.setComCode(commodityItem.getComCode());
+            commodity.setComName(commodityItem.getComName());
+
+            // 供应商信息
+            Supplier supplier = new Supplier(commodityItem.getSupplyName(), commodityItem.getMobile(),
+                    commodityItem.getAddress());
+            commodity.setSupplier(supplier);
+
+            // 商品价格和促销信息
+            commodity.setPrice(commodityItem.getPrice());
+
+            commodities.add(commodity);
+        }
+
+        LOGGER.info("getcommodityList IN");
+        return commodities;
     }
 
     /**

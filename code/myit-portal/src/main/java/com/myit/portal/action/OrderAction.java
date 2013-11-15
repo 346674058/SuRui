@@ -297,7 +297,7 @@ public class OrderAction extends BaseAction {
                 // 商品
                 Commodity commodity = new Commodity();
                 commodity.setComCode(orderInfoRespItem.getComCode());
-                commodity.setName(orderInfoRespItem.getCommName());
+                commodity.setComName(orderInfoRespItem.getCommName());
                 commodity.setPrice(orderInfoRespItem.getPrice());
 
                 orderItem.setCommodity(commodity);
