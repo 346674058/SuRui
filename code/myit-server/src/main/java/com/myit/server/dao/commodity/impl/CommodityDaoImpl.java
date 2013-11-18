@@ -152,8 +152,26 @@ public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDa
     }
 
     public boolean persistCommodity(Commodity commodity) throws Exception {
-        // TODO Auto-generated method stub
-        return false;
+        getHibernateTemplate().saveOrUpdate(commodity);
+        return true;
+    }
+
+    public Commodity findCommodityByComCode(String comCode) throws Exception {
+        LOGGER.info("findCommodityByComCode IN");
+
+        Commodity queryCommodity = new Commodity();
+        queryCommodity.setComId(comCode);
+
+        @SuppressWarnings("unchecked")
+        List<Commodity> commodities = getHibernateTemplate().findByExample(queryCommodity);
+
+        if (commodities != null && commodities.size() > 0) {
+            LOGGER.info("findCommodityByComCode OUT");
+            return commodities.get(0);
+        }
+
+        LOGGER.info("findCommodityByComCode OUT");
+        return null;
     }
 
 }

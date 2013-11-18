@@ -1,6 +1,5 @@
 package com.myit.server.service.commodity.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.myit.common.util.NumberConvert;
 import com.myit.common.util.RetCode;
 import com.myit.intf.bean.commodity.CommodityItem;
+import com.myit.intf.bean.commodity.CommodityReq;
+import com.myit.intf.bean.commodity.CommodityResp;
 import com.myit.intf.bean.commodity.SearchCommodityReq;
 import com.myit.intf.bean.commodity.SearchCommodityResp;
 import com.myit.intf.service.commodity.CommodityService;
@@ -127,12 +128,32 @@ public class CommodityServiceImpl implements CommodityService {
 
             // 商品价格和促销信息
             int price = NumberConvert.getRandomNumber(5, 20);
-            commodityItem.setPrice(new BigDecimal(price));
+            commodityItem.setPrice(new Double(price));
 
             commodityItems.add(commodityItem);
         }
 
         LOGGER.info("getcommodityList IN");
         return commodityItems;
+    }
+
+    public CommodityResp getCommodity(CommodityReq commodityReq) throws Exception {
+        LOGGER.info("getCommodity IN");
+        
+        LOGGER.debug("commodityReq="+commodityReq);
+        
+        //根据商品编码查询商品
+       Commodity commodity= commodityDao.findCommodityByComCode(commodityReq.getComCode());
+        
+       CommodityResp commodityResp= initCommodityResp(commodity);
+       
+        // TODO Auto-generated method stub
+        LOGGER.info("getCommodity OUT");
+        return commodityResp;
+    }
+
+    private CommodityResp initCommodityResp(Commodity commodity) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
