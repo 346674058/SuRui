@@ -24,6 +24,16 @@ public interface CommodityDao {
     public Commodity findCommodityById(Long id) throws Exception;
 
     /**
+     * 查询商品<br>
+     * 
+     * @author created by LiuCongwen at 2012-4-24
+     * @param comCode 商品编码
+     * @return
+     * @throws Exception
+     */
+    public Commodity findCommodityByComCode(String comCode) throws Exception;
+
+    /**
      * 获取商品记录数<br>
      * 
      * @author created by LiuCongwen at 2012-4-24
