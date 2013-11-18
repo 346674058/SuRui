@@ -2,11 +2,7 @@
 <#if commodities?exists && (commodities?size &gt; 0)>
 <table class="commodity-list">
 	<#list commodities as commodity>
-	<#if commodity_index == commodities?size-1>
-	<tr class="item last">
-	<#else>
 	<tr class="item">
-	</#if>
 		<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" >
 			<#if commodity.img?exists>
 			<img src="${commodity.img}" width="120px" height="120px;"></a></td>
@@ -14,11 +10,11 @@
 			<img src="${resRoot}/img/default.jpg" width="120px" height="120px;"></a></td>
 			</#if>
 		<td class="commodity-info">
-			<div class="name"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.comName}</a></div>
+			<a class="name" href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.comName}</a>
 			<#if commodity.supplier?exists>
 			<div class="supply-info">
 				<label>商户</label>${commodity.supplier.name}<br>
-				<label>电话</label>${commodity.supplier.telephone}<br>
+				<label>电话</label>${commodity.supplier.mobile}<br>
 				<label>地址</label>${commodity.supplier.address}
 			</div>
 			</#if>
@@ -65,7 +61,7 @@
 	$("#totalCount").text("${totalCount}");
 	
 	//分页
-	if(NaN(pageCount) && pageCount>1){
+	if(!isNaN(pageCount) && pageCount>1){
 		showPagenation(pageNo, pageCount, ".pagenation");
 	}
 </script>

@@ -710,7 +710,8 @@ input[type='button']:hover,a.btn:hover{opacity: 0.8;}
 .commodity-list .item .image img{width:120px; height:120px; border:1px solid #ccc; margin:13px;}
 
 .commodity-list .item .commodity-info{padding: 10px; vertical-align: top;}
-.commodity-list .item .commodity-info .name{font-size:20px;}
+.commodity-list .item .commodity-info .name{font-size:20px;font-weight: bold;color: #000000;}
+.commodity-list .item .commodity-info .name:hover{color: #f60;}
 .commodity-list .item .supply-info{margin-top:20px;}
 .commodity-list .item .supply-info label{margin-right:5px;font-weight:bold;}
 
@@ -721,9 +722,7 @@ input[type='button']:hover,a.btn:hover{opacity: 0.8;}
 .commodity-list .item .button{text-align:center;width:150px;}
 
 .shoppin-cart{width:960px;background-color:#fff;}
-
-.shoppin-cart .title{height:30px;border-bottom:1px solid #aaa;}
-
+.shoppin-cart .title{height:30px;border-bottom:1px solid #aaa;font-size: 16px;line-height: 42px;}
 
 .shoppin-cart .item{height:100px;border-bottom:1px dotted #aaa;background-color: #ffe;}
 .shoppin-cart .last{border-bottom:0px}

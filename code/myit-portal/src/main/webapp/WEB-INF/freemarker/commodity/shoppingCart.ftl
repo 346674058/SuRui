@@ -12,6 +12,7 @@
 	<#-- 引入css，不影响页面加载 -->
 	<#assign css =['css/common',
 		"css/selector",
+		'css/sonline/skin/default_blue',
 		"css/tab"
 				]>
 	<@res.css url =css />
@@ -46,13 +47,14 @@
 			</thead>
 			
 			<#list commodities as commodity>
-			<#if commodity_index == commodities?size-1>
-			<tr class="item last">
-			<#else>
 			<tr class="item">
-			</#if>
 				<td class="chk"><input type="checkbox" value="1" checked="checked"></td>
-				<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" ><img src="${resRoot}/${commodity.img}"></a></td>
+				<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" >
+					<#if commodity.img?exists>
+					<img src="${commodity.img}" width="70px" height="70px;"></a></td>
+					<#else>
+					<img src="${resRoot}/img/default.jpg" width="70px" height="70px;"></a></td>
+					</#if>
 				
 				<td style="text-align:left;">
 					<a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.name}</a>
@@ -101,25 +103,25 @@
 
 	<#-- 浮动工具栏 -->
 	<div class="sidebar" id="sidebar">
-		<a href="${base}/order/shoppingCart.htm" target="_self" title="添加到购物车" class="sidebar_icon_word_02"><div class="sidebar_word">购物车</div></a>
-		<a href="${base}/navigation/onlineService.htm" target="_blank" title="问题处理、疑问解答..." class="sidebar_icon_word_04"><div class="sidebar_word">在线客服</div></a>
 		<a href="#" title="返回顶部"><div class="sidebar_back"></div></a>
 	</div>
+	
+	<#-- 最后引入js，防止阻塞页面加载 -->
+	<#assign js = ["js/jquery/jquery-1.7.2.min",
+		"js/jquery.tab",
+		"js/jquery.tabChg",
+		"js/data/citys",
+		"js/selector",
+		"js/jquery.sonline",
+		
+		"js/common",
+		
+		"js/custom/shoppingCart"
+	] >
+	<@res.js url = js />
 	
 	<#-- 页脚 -->
 	<#include "/common/footer.ftl">
 </body>
 
-<#-- 最后引入js，防止阻塞页面加载 -->
-<#assign js = ["js/jquery/jquery.min",
-	"js/jquery.tab",
-	"js/jquery.tabChg",
-	"js/data/citys",
-	"js/selector",
-	
-	"js/common",
-	
-	"js/custom/shoppingCart"
-] >
-<@res.js url = js />
 </html>

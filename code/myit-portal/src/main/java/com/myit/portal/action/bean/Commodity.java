@@ -1,7 +1,6 @@
 package com.myit.portal.action.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Commodity implements Serializable {
 
@@ -19,10 +18,10 @@ public class Commodity implements Serializable {
     String img;
 
     // 商品价格
-    BigDecimal price;
+    Double price;
 
     // 优惠价格
-    BigDecimal promotionPrice;
+    Double promotionPrice;
 
     // 剩余份数
     int countRemain;
@@ -33,7 +32,7 @@ public class Commodity implements Serializable {
         // TODO Auto-generated constructor stub
     }
 
-    public Commodity(String comCode, String comName, String img, BigDecimal price, BigDecimal promotionPrice) {
+    public Commodity(String comCode, String comName, String img, Double price, Double promotionPrice) {
         this.comCode = comCode;
         this.comName = comName;
         this.img = img;
@@ -73,19 +72,19 @@ public class Commodity implements Serializable {
         this.img = img;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public BigDecimal getPromotionPrice() {
+    public Double getPromotionPrice() {
         return promotionPrice;
     }
 
-    public void setPromotionPrice(BigDecimal promotionPrice) {
+    public void setPromotionPrice(Double promotionPrice) {
         this.promotionPrice = promotionPrice;
     }
 

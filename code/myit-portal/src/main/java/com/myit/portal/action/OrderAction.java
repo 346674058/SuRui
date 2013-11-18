@@ -1,6 +1,5 @@
 package com.myit.portal.action;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,7 +120,7 @@ public class OrderAction extends BaseAction {
         for (int commodities_i = 0; commodities_i < 10; commodities_i++) {
 
             // 商品
-            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new BigDecimal(9.50), new BigDecimal(0.50));
+            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new Double(9.50), new Double(0.50));
 
             OrderItem orderItem = new OrderItem();
 
@@ -250,7 +249,7 @@ public class OrderAction extends BaseAction {
         for (int commodities_i = 0; commodities_i < 10; commodities_i++) {
 
             // 商品
-            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new BigDecimal(9.50), new BigDecimal(0.50));
+            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new Double(9.50), new Double(0.50));
 
             OrderItem orderItem = new OrderItem();
 
@@ -372,8 +371,8 @@ public class OrderAction extends BaseAction {
             for (int commodities_i = 0; commodities_i < 3; commodities_i++) {
 
                 // 商品
-                Commodity commodity = new Commodity("1", "盖浇饭" + commodities_i, "img/logo.jpg", new BigDecimal(9.50),
-                        new BigDecimal(0.50));
+                Commodity commodity = new Commodity("1", "盖浇饭" + commodities_i, "img/logo.jpg", new Double(9.50),
+                        new Double(0.50));
 
                 OrderItem orderItem = new OrderItem();
 
@@ -463,7 +462,7 @@ public class OrderAction extends BaseAction {
         for (int commodities_i = 0; commodities_i < 10; commodities_i++) {
 
             // 商品
-            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new BigDecimal(9.50), new BigDecimal(0.50));
+            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new Double(9.50), new Double(0.50));
 
             OrderItem orderItem = new OrderItem();
 

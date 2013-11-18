@@ -1,7 +1,6 @@
 package com.myit.portal.action.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class OrderItem implements Serializable {
 
@@ -19,7 +18,7 @@ public class OrderItem implements Serializable {
     int count;
 
     // 金额小计
-    BigDecimal subTotal;
+    Double subTotal;
 
     public OrderItem() {
         // TODO Auto-generated constructor stub
@@ -49,11 +48,11 @@ public class OrderItem implements Serializable {
         this.count = count;
     }
 
-    public BigDecimal getSubTotal() {
+    public Double getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(BigDecimal subTotal) {
+    public void setSubTotal(Double subTotal) {
         this.subTotal = subTotal;
     }
 

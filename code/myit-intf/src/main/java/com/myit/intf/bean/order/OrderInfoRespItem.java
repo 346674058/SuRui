@@ -1,7 +1,6 @@
 package com.myit.intf.bean.order;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import com.myit.common.beans.BaseModel;
 
@@ -27,17 +26,17 @@ public class OrderInfoRespItem extends BaseModel implements Serializable {
     String img;
 
     // 商品价格
-    BigDecimal price;
+    Double price;
 
     // 预定数量
     int count;
 
     // ------
     // 金额小计
-    BigDecimal subTotal;
+    Double subTotal;
 
     // 优惠金额
-    BigDecimal promotionPrice;
+    Double promotionPrice;
 
     // ------
     // 供应商编码
@@ -76,11 +75,11 @@ public class OrderInfoRespItem extends BaseModel implements Serializable {
         this.img = img;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -92,19 +91,19 @@ public class OrderInfoRespItem extends BaseModel implements Serializable {
         this.count = count;
     }
 
-    public BigDecimal getSubTotal() {
+    public Double getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(BigDecimal subTotal) {
+    public void setSubTotal(Double subTotal) {
         this.subTotal = subTotal;
     }
 
-    public BigDecimal getPromotionPrice() {
+    public Double getPromotionPrice() {
         return promotionPrice;
     }
 
-    public void setPromotionPrice(BigDecimal promotionPrice) {
+    public void setPromotionPrice(Double promotionPrice) {
         this.promotionPrice = promotionPrice;
     }
 

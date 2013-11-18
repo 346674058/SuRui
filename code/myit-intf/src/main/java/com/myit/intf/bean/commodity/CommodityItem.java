@@ -27,7 +27,7 @@ public class CommodityItem extends BaseModel implements Serializable {
     String img;
 
     // 商品价格
-    BigDecimal price;
+    Double price;
 
     // 预定数量
     int count;
@@ -76,11 +76,11 @@ public class CommodityItem extends BaseModel implements Serializable {
         this.img = img;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

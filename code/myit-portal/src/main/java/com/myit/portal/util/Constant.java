@@ -14,7 +14,7 @@ public class Constant {
     public static final String RANDOM_CODE = "randomCode";
 
     // 商品分类缓存key
-    public static final String CACHE = "CommodityCategory";
+    public static final String SHOPPING_CART = "shoppingCart";
 
     /** 常用变量 **/
     /** 禁用 **/

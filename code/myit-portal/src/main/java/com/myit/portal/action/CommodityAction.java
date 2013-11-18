@@ -1,6 +1,5 @@
 package com.myit.portal.action;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,8 @@ import com.myit.common.util.StringConvert;
 import com.myit.intf.bean.commCategory.CommCategoryReq;
 import com.myit.intf.bean.commCategory.CommCategoryResp;
 import com.myit.intf.bean.commodity.CommodityItem;
+import com.myit.intf.bean.commodity.CommodityReq;
+import com.myit.intf.bean.commodity.CommodityResp;
 import com.myit.intf.bean.commodity.SearchCommodityReq;
 import com.myit.intf.bean.commodity.SearchCommodityResp;
 import com.myit.intf.bean.district.DistrictReq;
@@ -26,6 +27,7 @@ import com.myit.intf.service.commodity.CommodityService;
 import com.myit.intf.service.district.DistrictService;
 import com.myit.portal.action.bean.Commodity;
 import com.myit.portal.action.bean.Supplier;
+import com.myit.portal.util.Constant;
 
 /**
  * 
@@ -247,10 +249,13 @@ public class CommodityAction extends BaseAction {
             // 商品价格和促销信息
             commodity.setPrice(commodityItem.getPrice());
 
+            // 库存信息
+            commodity.setCountRemain(100);
+
             commodities.add(commodity);
         }
 
-        LOGGER.info("getcommodityList IN");
+        LOGGER.info("getcommodityList OUT");
         return commodities;
     }
 
@@ -265,29 +270,81 @@ public class CommodityAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/shoppingCart")
     public String shoppingCart(Model model, HttpServletRequest request) {
         LOGGER.info("shoppingCart IN");
 
-        // 查询参数，返回到页面上，ajax表单提交做数据查询
+        // 从session中获取购物车内容
+        List<Commodity> commodities = null;
+        try {
+            commodities = (List<Commodity>) request.getSession().getAttribute(Constant.SHOPPING_CART);
 
-        List<Commodity> commodities = new ArrayList<Commodity>();
+            // 是否有新商品需要添加到购物车
+            String comCode = getParam("comCode", request);
+            if (!StringConvert.isEmpty(comCode)) {
+                // 根据商品编码查询商品，添加到购物车列表
+                CommodityReq commodityReq = new CommodityReq();
+                commodityReq.setComCode(comCode);
 
-        // TODO 演示数据
-        for (int commodities_i = 0; commodities_i < 10; commodities_i++) {
+                CommodityResp commodityResp = commodityService.getCommodity(commodityReq);
 
-            // 商品
-            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new BigDecimal(9.50), new BigDecimal(0.50));
+                // 转换成购物车商品
+                Commodity commodity = getCommodity(commodityResp);
+                // 初始化列表
+                if (commodities == null) {
+                    commodities = new ArrayList<Commodity>();
+                }
 
-            // 剩余份数
-            commodity.setCountRemain(1);
-
-            commodities.add(commodity);
+                // 新商品添加到购物车
+                add2ShoppingCart(commodities, commodity);
+            }
+        } catch (Exception e) {
+            LOGGER.warn("shopping cart is null", e);
         }
 
         model.addAttribute("commodities", commodities);
 
         LOGGER.info("shoppingCart OUT");
         return "commodity/shoppingCart.ftl";
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 添加商品到购物车，同种商品数量做+1处理
+     * 
+     * @param commodity
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private void add2ShoppingCart(List<Commodity> commodities, Commodity commodity) {
+        LOGGER.info("add2ShoppingCart IN");
+        
+        if (commodities==null) {
+            commodities=new ArrayList<Commodity>();
+            
+            commodities.add(commodity);
+            LOGGER.info("add2ShoppingCart OUT");
+            
+            return;
+        }
+
+        LOGGER.info("add2ShoppingCart OUT");
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 转换查询结果为购物车商品
+     * 
+     * @param commodityResp
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private Commodity getCommodity(CommodityResp commodityResp) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

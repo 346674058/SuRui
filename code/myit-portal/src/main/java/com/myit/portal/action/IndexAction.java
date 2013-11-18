@@ -1,6 +1,5 @@
 package com.myit.portal.action;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class IndexAction extends BaseAction {
                 for (int commodities_i = 0; commodities_i < 4; commodities_i++) {
 
                     // 商品
-                    Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new BigDecimal(7.50), new BigDecimal(0.50));
+                    Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new Double(7.50), new Double(0.50));
                     commodities.add(commodity);
                 }
 

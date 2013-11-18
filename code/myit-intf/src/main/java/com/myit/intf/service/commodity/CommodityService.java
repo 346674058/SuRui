@@ -1,5 +1,7 @@
 package com.myit.intf.service.commodity;
 
+import com.myit.intf.bean.commodity.CommodityReq;
+import com.myit.intf.bean.commodity.CommodityResp;
 import com.myit.intf.bean.commodity.SearchCommodityReq;
 import com.myit.intf.bean.commodity.SearchCommodityResp;
 
@@ -22,5 +24,17 @@ public interface CommodityService {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    SearchCommodityResp searchCommodities(SearchCommodityReq commodityListReq) throws Exception;
+    SearchCommodityResp searchCommodities(SearchCommodityReq searchCommodityReq) throws Exception;
+
+    /**
+     * 功能描述: <br>
+     * 查询商品实体
+     * 
+     * @param commodityReq
+     * @return
+     * @throws Exception
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    CommodityResp getCommodity(CommodityReq commodityReq) throws Exception;
 }
