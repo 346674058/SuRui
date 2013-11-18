@@ -1,7 +1,9 @@
 package com.myit.portal.action;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
+import com.myit.common.unionpay.QuickPayConf;
+import com.myit.common.unionpay.QuickPayUtils;
 import com.myit.common.util.RetCode;
 import com.myit.intf.bean.order.BookOrderReq;
 import com.myit.intf.bean.order.BookOrderResp;
@@ -47,6 +51,8 @@ public class OrderAction extends BaseAction {
 
     // 商品查询页面
     private static final String SEARCH_URL = "/commodity/search.htm";
+    // 商品预订页面
+    private static final String BOOK_RESULT_URL = "/order/bookResult.htm";
 
     @Resource
     OrderInfoService orderInfoService;
@@ -475,6 +481,94 @@ public class OrderAction extends BaseAction {
 
         LOGGER.info("orderDetail OUT");
         return "order/orderDetail.ftl";
+    }
+
+    @RequestMapping(value = "/pay/{orderNo}")
+    public String pay(@PathVariable String orderNo, Model model, HttpServletRequest request) throws Exception {
+        LOGGER.info("pay OUT");
+
+        LOGGER.debug("orderNo=" + orderNo);
+
+        // TODO 调用接口查询订单支付信息
+        Order order = new Order();
+
+        // 商户需要组装如下对象的数据
+
+        // 当前会员
+        Member member = (Member) request.getSession().getAttribute(Constant.LOGIN_MEMBER);
+        String ip = request.getRemoteAddr();
+
+        String[] valueVo = getPayparam(order, member, ip);
+
+        String signType = QuickPayConf.SIGNTYPE_MD5;
+
+        String payHtml = new QuickPayUtils().createPayHtml(valueVo, signType);// 跳转到银联页面支付
+
+        LOGGER.debug("payHtml=\n" + payHtml);
+
+        // 返回到页面
+        model.addAttribute("jsonData", payHtml);
+
+        LOGGER.info("pay OUT");
+        return "common/ajaxResult.ftl";
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 获取支付请求参数数组
+     * 
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private String[] getPayparam(Order order, Member member, String ip) {
+
+        // 商品数量
+        int commSize = order.getOrderItems().size();
+
+        String retParam[] = new String[] { QuickPayConf.version,// 协议版本
+                QuickPayConf.charset,// 字符编码
+                QuickPayConf.TRADETYPE_PAY,// 交易类型
+                "",// 原始交易流水号
+                QuickPayConf.merCode,// 商户代码
+                QuickPayConf.merName,// 商户简称
+                "",// 收单机构代码（仅收单机构接入需要填写）
+                "",// 商户类别（收单机构接入需要填写）
+                "",// 商品URL
+                "",// 商品名称
+                "0",// 商品单价 单位：分
+                String.valueOf(commSize),// 商品数量
+                "0",// 折扣 单位：分
+                "0",// 运费 单位：分
+                order.getOrderNo(),// 订单号（需要商户自己生成）
+                String.valueOf(order.getTotalPrice()),// 交易金额 单位：分
+                QuickPayConf.CURRENCY_CODE,// 交易币种.156-RMB
+                new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()),// 交易时间
+                ip,// 用户IP
+                member.getNick(),// 用户真实姓名
+                "",// 默认支付方式
+                "",// 默认银行编号
+                QuickPayConf.TIMEOUT,// 交易超时时间
+                QuickPayConf.merFrontEndUrl,// 前台回调商户URL
+                QuickPayConf.merBackEndUrl,// 后台回调商户URL
+                ""// 商户保留域
+        };
+
+        return retParam;
+    }
+
+    @RequestMapping(value = "/payResult")
+    public void payResult(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        LOGGER.info("payResult OUT");
+
+        String orderNo = "V000000001";
+
+        // TODO 调用接口查询订单支付信息
+        // Order order = new Order();
+
+        LOGGER.info("payResult OUT");
+        response.sendRedirect(request.getContextPath());
     }
 
 }
