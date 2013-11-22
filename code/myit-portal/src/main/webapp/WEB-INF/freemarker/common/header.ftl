@@ -32,14 +32,10 @@
             </div>
             <input type="button" id="btn_search_word" class="searchbar_button left" value="搜索"/>
             <div class="searchbar_suggest left">
-                <span>您可以搜:</span>
-                <a href="javascript:void(0);" title="度假山庄" target="_self">度假山庄</a>
-                <a href="javascript:void(0);" title="国内游" target="_self">国内游</a>
-                <a href="javascript:void(0);" title="净水器" target="_self">净水器</a>
-                <a href="javascript:void(0);" title="开锁" target="_self">开锁</a>
-                <a href="javascript:void(0);" title="体育游戏" target="_self">体育游戏</a>
-                <a href="javascript:void(0);" title="同城交友" target="_self">同城交友</a>
-                <a href="javascript:void(0);" title="小吃零食" target="_self">小吃零食</a>
+                <span>猜你感兴趣:</span>
+                <a href="javascript:void(0);" title="商务套餐" target="_self">商务套餐</a>
+                <a href="javascript:void(0);" title="盖浇饭" target="_self">盖浇饭</a>
+                <a href="javascript:void(0);" title="简餐" target="_self">简餐</a>
             </div>
         </div>
     </div>
@@ -49,12 +45,14 @@
 <div class="menu_left"></div>
 <div class="menu_right"></div>
 <div class="menu center">
+	<#-- 暂时屏蔽品类导航
 	<div class="menu_catalog left">
 		<a class="left" title="所有产品分类" href="#">所有产品分类</a><div class="menu_catalog_arrow right">+</div>
 	</div>
+	-->
 	
 	<a href="${base}/index.htm" title="首页" target="_self">首页</a>
-	<a href="${base}/recomodity/list.htm" title="外卖外送" target="_self">外卖外送</a>
+	<a href="${base}/recomodity/list.htm" title="外卖外送" target="_self" class="on">外卖外送</a>
 	<a href="#" title="美食广场" target="_self">美食广场</a>
 </div>
 

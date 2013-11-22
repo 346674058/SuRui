@@ -117,6 +117,7 @@ public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDa
         return queryString;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Commodity> findCommodities(int start, int pageSize, Commodity commodity, Map<String, Object> param)
             throws Exception {
         LOGGER.info("findCommodities IN");
@@ -165,13 +166,13 @@ public class CommodityDaoImpl extends HibernateDaoSupport implements CommodityDa
         @SuppressWarnings("unchecked")
         List<Commodity> commodities = getHibernateTemplate().findByExample(queryCommodity);
 
-        if (commodities != null && commodities.size() > 0) {
+        if (commodities == null || commodities.size() == 0) {
             LOGGER.info("findCommodityByComCode OUT");
-            return commodities.get(0);
+            return null;
         }
 
         LOGGER.info("findCommodityByComCode OUT");
-        return null;
+        return commodities.get(0);
     }
 
 }

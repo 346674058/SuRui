@@ -46,7 +46,10 @@
 			</tr>
 			</thead>
 			
+			<#assign count=0 >
 			<#list commodities as commodity>
+			<#-- 累加商品数量 -->
+			<#assign count=count+1>
 			<tr class="item">
 				<td class="chk"><input type="checkbox" value="1" checked="checked"></td>
 				<td class="image"><a href="${base}/commodity/info.htm?comCode=${commodity.comCode}" >
@@ -57,7 +60,7 @@
 					</#if>
 				
 				<td style="text-align:left;">
-					<a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.name}</a>
+					<a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.comName}</a>
 				</td>
 				
 				<td style="text-align:right;">￥${commodity.price}</td>
@@ -65,11 +68,11 @@
 				
 				<td class="count">
 					<a title="-1">-</a>
-					<input type="text" id="count" name="count" value="1">
+					<input type="text" id="count" name="count" value="${commodity.bookCount}">
 					<a title="+1">+</a>
 				</td>
 				
-				<td class="price active">￥${commodity.price}</td>
+				<td class="price active">￥${commodity.subTotalPrice}</td>
 				
 				<td class="button"> <a id="delBtn" href="javascript:void(0);">删除</a> </td>
 			</tr>
@@ -81,7 +84,7 @@
 		<div class="toolbarCon mt10">
 			<div class="left" style="margin-left: 30px; margin-top: 10px;"><input type="checkbox" value="all">&nbsp;全选</div>
 	    	<div class="toolbar right">
-	    		总计&nbsp;<label class="active">12</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥127.50</label>
+	    		总计&nbsp;<label class="active">${count}</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥${totalPrice}</label>
 	    		<a href="${base}/commodity/search.htm" target="_self" >继续购物</a>
 	    		<a page_index="1" class="btn highlight" target="_self" href="${base}/order/bookOrder.htm">去结算</a>
 	    	</div>

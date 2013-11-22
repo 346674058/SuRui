@@ -13,6 +13,9 @@
 		<property name="comName" type="string" column="COM_NAME" not-null="true" length="100" />
 		
 		<property name="comDescribe" type="string" column="COM_DESCRIBE"/>
+		
+		<property name="basePrice" type="double" column="BASE_PRICE"/>
+		<property name="salePrice" type="double" column="SALE_PRICE"/>
 
 		<property name="createTime" type="timestamp" column="CREATE_TIME" not-null="true" />
 		<property name="lastModified" type="timestamp" column="LAST_MODIFIED"/>

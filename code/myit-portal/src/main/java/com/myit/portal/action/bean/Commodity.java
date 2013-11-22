@@ -9,22 +9,28 @@ public class Commodity implements Serializable {
     private static final long serialVersionUID = 9166253118509092887L;
 
     // 商品编码
-    String comCode;
+    private String comCode;
 
     // 商品名称
-    String comName;
+    private String comName;
 
     // 商品图片
-    String img;
+    private String img;
 
     // 商品价格
-    Double price;
+    private Double price;
 
     // 优惠价格
-    Double promotionPrice;
+    private Double promotionPrice;
+
+    // 小计金额
+    private Double subTotalPrice;
 
     // 剩余份数
-    int countRemain;
+    private int countRemain;
+
+    // 预订份数
+    private int bookCount;
 
     Supplier supplier;
 
@@ -80,6 +86,16 @@ public class Commodity implements Serializable {
         this.price = price;
     }
 
+    public Double getSubTotalPrice() {
+        subTotalPrice = getPrice() * getBookCount();
+
+        return subTotalPrice;
+    }
+
+    public void setSubTotalPrice(Double subTotalPrice) {
+        this.subTotalPrice = subTotalPrice;
+    }
+
     public Double getPromotionPrice() {
         return promotionPrice;
     }
@@ -94,6 +110,51 @@ public class Commodity implements Serializable {
 
     public void setCountRemain(int countRemain) {
         this.countRemain = countRemain;
+    }
+
+    public int getBookCount() {
+        return bookCount;
+    }
+
+    public void setBookCount(int bookCount) {
+        this.bookCount = bookCount;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((comCode == null) ? 0 : comCode.hashCode());
+        result = prime * result + ((comName == null) ? 0 : comName.hashCode());
+        result = prime * result + ((price == null) ? 0 : price.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Commodity other = (Commodity) obj;
+        if (comCode == null) {
+            if (other.comCode != null)
+                return false;
+        } else if (!comCode.equals(other.comCode))
+            return false;
+        if (comName == null) {
+            if (other.comName != null)
+                return false;
+        } else if (!comName.equals(other.comName))
+            return false;
+        if (price == null) {
+            if (other.price != null)
+                return false;
+        } else if (!price.equals(other.price))
+            return false;
+        return true;
     }
 
 }

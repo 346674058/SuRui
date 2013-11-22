@@ -17,19 +17,24 @@ public class Commodity extends BaseModel implements Serializable {
     private static final long serialVersionUID = -6838676106112859700L;
 
     // 商品编码：供应商编码+分类编码+5位流水
-    String comId;
+    private String comId;
 
     // 商品名称
-    String comName;
+    private String comName;
 
     // 供应商id
-    Provider provider;
+    private Provider provider;
 
     // 商品分类id
-    CommCategory commCategory;
+    private CommCategory commCategory;
 
     // 商品描述
-    String comDescribe;
+    private String comDescribe;
+
+    // 商品底价
+    private Double basePrice;
+    // 商品售价
+    private Double salePrice;
 
     public Commodity() {
     }
@@ -72,6 +77,22 @@ public class Commodity extends BaseModel implements Serializable {
 
     public void setComDescribe(String comDescribe) {
         this.comDescribe = comDescribe;
+    }
+
+    public Double getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(Double basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public Double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
     }
 
     @Override
@@ -126,7 +147,8 @@ public class Commodity extends BaseModel implements Serializable {
     @Override
     public String toString() {
         return "Commodity [comId=" + comId + ", comName=" + comName + ", provider=" + provider + ", commCategory="
-                + commCategory + ", comDescribe=" + comDescribe + "]";
+                + commCategory + ", comDescribe=" + comDescribe + ", basePrice=" + basePrice + ", salePrice="
+                + salePrice + "]";
     }
 
 }

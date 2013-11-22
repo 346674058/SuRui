@@ -279,10 +279,37 @@ public class CommodityAction extends BaseAction {
         List<Commodity> commodities = null;
         try {
             commodities = (List<Commodity>) request.getSession().getAttribute(Constant.SHOPPING_CART);
-
             // 是否有新商品需要添加到购物车
             String comCode = getParam("comCode", request);
-            if (!StringConvert.isEmpty(comCode)) {
+
+            // 无新商品，直接返回原有的购物车商品列表
+            if (StringConvert.isEmpty(comCode)) {
+                // 返回购物车商品列表
+                model.addAttribute("commodities", commodities);
+
+                LOGGER.info("shoppingCart OUT");
+                return "commodity/shoppingCart.ftl";
+            }
+
+            // 购物车不为空，检查商品是否已在购物车，再则加1
+
+            boolean exsit = false;
+
+            if (commodities != null && commodities.size() > 0) {
+                for (Commodity commodity : commodities) {
+                    if (commodity.getComCode().equals(comCode)) {
+                        // 预订份数加1
+                        int bookCount = commodity.getBookCount() + 1;
+                        commodity.setBookCount(bookCount);
+
+                        // 商品存在
+                        exsit = true;
+                    }
+
+                }
+            }
+
+            if (!exsit) {
                 // 根据商品编码查询商品，添加到购物车列表
                 CommodityReq commodityReq = new CommodityReq();
                 commodityReq.setComCode(comCode);
@@ -299,14 +326,52 @@ public class CommodityAction extends BaseAction {
                 // 新商品添加到购物车
                 add2ShoppingCart(commodities, commodity);
             }
+
         } catch (Exception e) {
             LOGGER.warn("shopping cart is null", e);
         }
 
+        // 计算购物车总金额
+        Double totalPrice = getTotalPrice(commodities);
+
+        // 返回购物车商品列表
+        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("commodities", commodities);
+        request.getSession().setAttribute(Constant.SHOPPING_CART, commodities);
 
         LOGGER.info("shoppingCart OUT");
         return "commodity/shoppingCart.ftl";
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 计算购物车总金额
+     * 
+     * @param commodities
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private Double getTotalPrice(List<Commodity> commodities) {
+        LOGGER.info("getTotalPrice IN");
+
+        Double totalPrice = new Double(0);
+
+        if (commodities == null) {
+            LOGGER.warn("commodities is null");
+
+            LOGGER.info("getTotalPrice IN");
+            return totalPrice;
+        }
+
+        // 循环累加小计金额得到总计金额
+        for (Commodity commodity : commodities) {
+            totalPrice += commodity.getSubTotalPrice();
+        }
+
+        LOGGER.info("getTotalPrice IN");
+        return totalPrice;
     }
 
     /**
@@ -320,17 +385,22 @@ public class CommodityAction extends BaseAction {
      */
     private void add2ShoppingCart(List<Commodity> commodities, Commodity commodity) {
         LOGGER.info("add2ShoppingCart IN");
-        
-        if (commodities==null) {
-            commodities=new ArrayList<Commodity>();
-            
-            commodities.add(commodity);
+
+        if (commodity == null) {
+            LOGGER.warn("commodity is null");
+
             LOGGER.info("add2ShoppingCart OUT");
-            
             return;
         }
 
+        if (commodities == null) {
+            commodities = new ArrayList<Commodity>();
+        }
+
+        commodities.add(commodity);
         LOGGER.info("add2ShoppingCart OUT");
+
+        return;
     }
 
     /**
@@ -344,7 +414,29 @@ public class CommodityAction extends BaseAction {
      * @since [产品/模块版本](可选)
      */
     private Commodity getCommodity(CommodityResp commodityResp) {
-        // TODO Auto-generated method stub
-        return null;
+        LOGGER.info("getCommodity IN");
+
+        // 入参为空
+        if (commodityResp == null) {
+            LOGGER.warn("commodityResp is null");
+
+            LOGGER.info("getCommodity OUT");
+            return null;
+        }
+
+        Commodity commodity = new Commodity();
+
+        commodity.setComCode(commodityResp.getComCode());
+        commodity.setComName(commodityResp.getComName());
+        commodity.setCountRemain(100);
+
+        // 默认预订1份
+        commodity.setBookCount(1);
+
+        // 商品售价
+        commodity.setPrice(commodityResp.getPrice());
+
+        LOGGER.info("getCommodity OUT");
+        return commodity;
     }
 }

@@ -113,6 +113,7 @@ a:hover{ text-decoration:none; color:#f60;}
     background-color:#D32E00;
     position:relative;
 }
+
 .menu_left{
     height:40px;
     background-color:#D32E00;
@@ -149,10 +150,6 @@ a:hover{ text-decoration:none; color:#f60;}
     color:white;
     font-size:22px;
 }
-.menu a:hover{
-    background-color:#B81700;
-    text-decoration:none;
-}
 .menu_catalog a:hover{
     background-color:#3399FF;
     text-decoration:none;
@@ -165,6 +162,14 @@ a:hover{ text-decoration:none; color:#f60;}
     height:40px;
     line-height:40px;
     text-align:center;
+    text-decoration:none;    
+}
+.menu a:hover{
+    background-color:#B81700;
+    font-weight: bold;
+}
+.menu a.on{
+    background-color:#B81700;
 }
 
 .footerCon{ background-color: #F3F3F3/*FFFFFF*/; border-top: 1px solid #CCCCCC; height: 110px; margin-top: 20px; width: 100%;}

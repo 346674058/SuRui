@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.myit.common.util.NumberConvert;
 import com.myit.common.util.RetCode;
 import com.myit.intf.bean.commodity.CommodityItem;
 import com.myit.intf.bean.commodity.CommodityReq;
@@ -126,9 +125,8 @@ public class CommodityServiceImpl implements CommodityService {
             String imgUrl = null;
             commodityItem.setImg(imgUrl);
 
-            // 商品价格和促销信息
-            int price = NumberConvert.getRandomNumber(5, 20);
-            commodityItem.setPrice(new Double(price));
+            // 商品售价和促销信息
+            commodityItem.setPrice(commodity.getSalePrice());
 
             commodityItems.add(commodityItem);
         }
@@ -139,21 +137,61 @@ public class CommodityServiceImpl implements CommodityService {
 
     public CommodityResp getCommodity(CommodityReq commodityReq) throws Exception {
         LOGGER.info("getCommodity IN");
-        
-        LOGGER.debug("commodityReq="+commodityReq);
-        
-        //根据商品编码查询商品
-       Commodity commodity= commodityDao.findCommodityByComCode(commodityReq.getComCode());
-        
-       CommodityResp commodityResp= initCommodityResp(commodity);
-       
+
+        LOGGER.debug("commodityReq=" + commodityReq);
+
+        // 根据商品编码查询商品
+        Commodity commodity = commodityDao.findCommodityByComCode(commodityReq.getComCode());
+
+        CommodityResp commodityResp = initCommodityResp(commodity);
+
         // TODO Auto-generated method stub
         LOGGER.info("getCommodity OUT");
         return commodityResp;
     }
 
+    /**
+     * 
+     * 功能描述: <br>
+     * 转换商品对象
+     * 
+     * @param commodity
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
     private CommodityResp initCommodityResp(Commodity commodity) {
-        // TODO Auto-generated method stub
-        return null;
+        LOGGER.info("initCommodityResp IN");
+
+        // 入参为空
+        if (commodity == null) {
+            LOGGER.warn("commodity is null");
+
+            LOGGER.info("initCommodityResp OUT");
+            return null;
+        }
+
+        // 商品供应商不能为空
+        if (commodity.getProvider() == null) {
+            LOGGER.warn("provider is null");
+
+            LOGGER.info("initCommodityResp OUT");
+            return null;
+        }
+
+        CommodityResp commodityResp = new CommodityResp();
+
+        commodityResp.setComCode(commodity.getComId());
+        commodityResp.setComName(commodity.getComName());
+
+        // 商品售价
+        commodityResp.setPrice(commodity.getSalePrice());
+
+        commodityResp.setSupplyName(commodity.getProvider().getProviderName());
+        commodityResp.setMobile(commodity.getProvider().getMobile());
+        commodityResp.setAddress(commodity.getProvider().getAddress());
+
+        LOGGER.info("initCommodityResp OUT");
+        return commodityResp;
     }
 }
