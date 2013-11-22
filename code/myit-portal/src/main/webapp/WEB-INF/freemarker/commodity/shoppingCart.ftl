@@ -63,7 +63,7 @@
 					<a href="${base}/commodity/info.htm?comCode=${commodity.comCode}">${commodity.comName}</a>
 				</td>
 				
-				<td style="text-align:right;">￥${commodity.price}</td>
+				<td style="text-align:right;">￥${commodity.price?string("0.##")}</td>
 				<td></td>
 				
 				<td class="count">
@@ -72,7 +72,7 @@
 					<a title="+1">+</a>
 				</td>
 				
-				<td class="price active">￥${commodity.subTotalPrice}</td>
+				<td class="price active">￥${commodity.subTotalPrice?string("0.##")}</td>
 				
 				<td class="button"> <a id="delBtn" href="javascript:void(0);">删除</a> </td>
 			</tr>
@@ -84,7 +84,7 @@
 		<div class="toolbarCon mt10">
 			<div class="left" style="margin-left: 30px; margin-top: 10px;"><input type="checkbox" value="all">&nbsp;全选</div>
 	    	<div class="toolbar right">
-	    		总计&nbsp;<label class="active">${count}</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥${totalPrice}</label>
+	    		总计&nbsp;<label class="active">${count}</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥${totalPrice?string("0.##")}</label>
 	    		<a href="${base}/commodity/search.htm" target="_self" >继续购物</a>
 	    		<a page_index="1" class="btn highlight" target="_self" href="${base}/order/bookOrder.htm">去结算</a>
 	    	</div>

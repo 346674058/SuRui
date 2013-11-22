@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 import com.myit.common.unionpay.QuickPayConf;
@@ -82,6 +83,7 @@ public class OrderAction extends BaseAction {
         order.setMobile(member.getMobile());
         order.setAddress(member.getAddress());
 
+        //获取选择的商品
         List<OrderItem> orderItems = getCheckedItems(request);
 
         // 没有选择商品，跳转到商品搜索页面
@@ -94,12 +96,48 @@ public class OrderAction extends BaseAction {
 
         LOGGER.debug("checked orderItems,size=" + orderItems.size());
 
+        //商品列表
         order.setOrderItems(orderItems);
-
+        
+        //计算商品总价
+        Double totalPrice=getTotalPrice(orderItems);
+        order.setTotalPrice(totalPrice);
+        
         model.addAttribute("order", order);
 
         LOGGER.info("bookOrder OUT");
         return "order/bookOrder.ftl";
+    }
+
+    /**
+     * 
+     * 功能描述: <br>
+     * 计算订单总价
+     *
+     * @param orderItems
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    private Double getTotalPrice(List<OrderItem> orderItems) {
+        LOGGER.info("getTotalPrice IN");
+
+        Double totalPrice = new Double(0);
+
+        if (orderItems == null) {
+            LOGGER.warn("orderItems is null");
+
+            LOGGER.info("getTotalPrice IN");
+            return totalPrice;
+        }
+
+        // 循环累加小计金额得到总计金额
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getSubTotal();
+        }
+
+        LOGGER.info("getTotalPrice IN");
+        return totalPrice;
     }
 
     /**
@@ -115,19 +153,22 @@ public class OrderAction extends BaseAction {
 
         List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
+        // 从购物车中取出商品列表
+        @SuppressWarnings("unchecked")
+        List<Commodity> commodities = (List<Commodity>) request.getSession().getAttribute(Constant.SHOPPING_CART);
+
         // 获取从购物车里面选择的的商品信息，包括各类商品的数量，展示在页面上。
-        // TODO 演示数据
-        for (int commodities_i = 0; commodities_i < 10; commodities_i++) {
+        for (Commodity commodity:commodities) {
 
-            // 商品
-            Commodity commodity = new Commodity("1", "盖浇饭", "img/logo.jpg", new Double(9.50), new Double(0.50));
-
+            // 订单商品
             OrderItem orderItem = new OrderItem();
-
             orderItem.setCommodity(commodity);
 
             // 预订份数
-            orderItem.setCount(1);
+            orderItem.setCount(commodity.getBookCount());
+            
+            //小计
+            orderItem.setSubTotal(commodity.getSubTotalPrice());
 
             orderItems.add(orderItem);
         }
@@ -147,7 +188,7 @@ public class OrderAction extends BaseAction {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    @RequestMapping(value = "/submitOrder")
+    @RequestMapping(value = "/submitOrder", method = RequestMethod.POST)
     public String submitOrder(Model model, HttpServletRequest request) throws Exception {
         LOGGER.info("submitOrder IN");
 

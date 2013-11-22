@@ -157,7 +157,7 @@ public class MemberAction extends BaseAction {
             if (RetCode.MEMBER_NOT_EXSIT.equals(loginResp.getRetCode())) {
                 LOGGER.error("loginResp is null");
 
-                data.put("retCode", RetCode.FAILED);
+                data.put("retCode", Constant.FAILED);
                 data.put("msg", "会员不存在，请核对您的会员帐号");
             }
 
@@ -165,7 +165,7 @@ public class MemberAction extends BaseAction {
             if (RetCode.PASSWORD_INCRECT.equals(loginResp.getRetCode())) {
                 LOGGER.error("password is increct");
 
-                data.put("retCode", RetCode.FAILED);
+                data.put("retCode", Constant.FAILED);
                 data.put("msg", "密码错误，请核对您的密码");
             }
 
@@ -173,7 +173,7 @@ public class MemberAction extends BaseAction {
             if (RetCode.MEMBER_INACTIVE.equals(loginResp.getRetCode())) {
                 LOGGER.error("member is invalid");
 
-                data.put("retCode", RetCode.FAILED);
+                data.put("retCode", Constant.FAILED);
                 data.put("msg", "会员被禁止登录，请与管理员联系");
             }
 
@@ -258,13 +258,13 @@ public class MemberAction extends BaseAction {
             LOGGER.warn("registResp is null");
 
             // 接口调用异常
-            data.put("retCode", RetCode.FAILED);
+            data.put("retCode", Constant.FAILED);
             data.put("msg", "注册失败，请与客服025-111111联系。");
-        } else if (!"0".equals(registResp.getRetCode())) {
+        } else if (!RetCode.SUCCESS.equals(registResp.getRetCode())) {
             LOGGER.warn("member regist failed,retCode=" + registResp.getRetCode());
 
             // 注册失败
-            data.put("retCode", RetCode.FAILED);
+            data.put("retCode", Constant.FAILED);
             data.put("msg", "注册失败，请与客服025-111111联系。");
 
         } else { // 注册成功
@@ -278,7 +278,7 @@ public class MemberAction extends BaseAction {
 
             request.getSession(true).setAttribute(Constant.LOGIN_MEMBER, member);
 
-            data.put("retCode", RetCode.SUCCESS);
+            data.put("retCode", Constant.SUCCESS);
         }
 
         Gson gson = new Gson();

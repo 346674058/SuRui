@@ -1,4 +1,5 @@
 <#-- 数据列表 -->
+<#setting number_format="0.##">
 <#if commodities?exists && (commodities?size &gt; 0)>
 <table class="commodity-list">
 	<#list commodities as commodity>
@@ -22,7 +23,7 @@
 		
 		<td class="price">
 			<#if commodity.promotionPrice?exists>
-			<label class="promotion">优惠￥${commodity.promotionPrice}</label>
+			<label class="promotion">优惠￥${commodity.promotionPrice?string("0.##")}</label>
 			</#if>
 			<label class="cur-price">￥${commodity.price}</label>
 		</td>

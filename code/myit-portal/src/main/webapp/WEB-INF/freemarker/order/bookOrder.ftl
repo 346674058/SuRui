@@ -107,20 +107,19 @@
 			</tr>
 			</thead>
 			
+			<#assign count=0 >
 			<#list order.orderItems as orderItem>
-			<#if orderItem_index == order.orderItems?size-1>
+			<#-- 累加商品数量 -->
+			<#assign count=count+1>
 			<tr class="item last">
-			<#else>
-			<tr class="item">
-			</#if>
 				<td class="image"><img src="${resRoot}/${orderItem.commodity.img}"></td>				
-				<td style="text-align:left;">${orderItem.commodity.name}</td>
+				<td style="text-align:left;">${orderItem.commodity.comName}</td>
 				
-				<td style="text-align:right;">￥${orderItem.commodity.price}</td>	
+				<td style="text-align:right;">￥${orderItem.commodity.price?string("0.##")}</td>	
 				<td></td>
 							
 				<td class="count">${orderItem.count}</td>				
-				<td class="price active" style="width:120px;text-align:left;">￥${orderItem.subTotal}<br><label class="freight">（另加运费：￥2.00）</label></td>
+				<td class="price active" style="width:120px;text-align:left;">￥${orderItem.subTotal?string("0.##")}<br><label class="freight">（另加运费：￥2.00）</label></td>
 			</tr>
 			</#list>
 			
@@ -130,7 +129,7 @@
 		<div class="toolbarCon mt10">
 			<div class="left" style="margin-left:20px;margin-top:10px;">预计最晚送达时间：<label class="active">2013-09-19 12:30</label></div>
 	    	<div class="toolbar right">
-	    		总计&nbsp;<label class="active">12</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥${order.totalPrice}</label>
+	    		总计&nbsp;<label class="active">${count}</label>&nbsp;件商品，总额&nbsp;<label class="active" style="margin-right:100px;font-size:16px;">￥${order.totalPrice?string("0.##")}</label>
 	    		<a id="submit-btn" class="btn highlight" target="_self" href="#">提交订单</a>
 	    	</div>
 		</div>

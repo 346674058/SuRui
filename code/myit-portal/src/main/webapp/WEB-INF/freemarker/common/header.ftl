@@ -4,9 +4,9 @@
     	<div class="left">
     		<#if Session["loginMember"]?exists>
     			<#assign member=Session["loginMember"] >
-				<label id="timePeri">您</label>好，<#if member.nick?exists>${member.nick}<#else>${member.memberNo}</#if><#if !member.mobile?exists>，您还没有绑定手机，请[<a href="../member/bandMobile.html" target="_self" class="active">绑定手机</a>]</#if>，[<a href="${base}/member/logout.htm" class="active">退出</a>]
+				<label id="timePeri">您好</label>，<#if member.nick?exists>${member.nick}<#else>${member.memberNo}</#if><#if !member.mobile?exists>，您还没有绑定手机，请[<a href="../member/bandMobile.html" target="_self" class="active">绑定手机</a>]</#if>，[<a href="${base}/member/logout.htm" class="active">退出</a>]
     		<#else>
-	    		<label id="timePeri">您</label>好，请[<a href="${base}/member/login.htm" class="active">登录</a>]，没有账户？[<a href="${base}/member/regist.htm" class="active">注册</a>]
+	    		<label id="timePeri">您好</label>，请[<a href="${base}/member/login.htm" class="active">登录</a>]，没有账户？[<a href="${base}/member/regist.htm" class="active">注册</a>]
     		</#if>
     	
     	</div>

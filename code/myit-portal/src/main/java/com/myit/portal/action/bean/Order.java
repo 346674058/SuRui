@@ -1,7 +1,6 @@
 package com.myit.portal.action.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Order implements Serializable {
@@ -29,7 +28,7 @@ public class Order implements Serializable {
     String address;
 
     // 订单金额
-    BigDecimal totalPrice;
+    Double totalPrice;
 
     // 订单状态
     String status;
@@ -88,11 +87,11 @@ public class Order implements Serializable {
         this.address = address;
     }
 
-    public BigDecimal getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

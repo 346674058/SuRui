@@ -269,7 +269,7 @@ function getTimePeri(){
 } 
 
 function getTimePeriText(){
-	var text = ["早上","上午","中午","下午","晚上","深夜"];
+	var text = ["早上好","上午好","中午好","下午好","晚上好","深夜了"];
 	
 	var peri = getTimePeri()-1;
 	return text[peri];
